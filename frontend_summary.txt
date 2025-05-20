@@ -1,0 +1,2734 @@
+>>>> README.md
+This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+
+## Getting Started
+
+First, run the development server:
+
+```bash
+npm run dev
+# or
+yarn dev
+# or
+pnpm dev
+# or
+bun dev
+```
+
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+
+You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+
+This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+
+## Learn More
+
+To learn more about Next.js, take a look at the following resources:
+
+- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
+- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+
+You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+
+## Deploy on Vercel
+
+The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+
+Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+
+>>>> eslint.config.mjs
+import { dirname } from "path";
+import { fileURLToPath } from "url";
+import { FlatCompat } from "@eslint/eslintrc";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+
+const compat = new FlatCompat({
+  baseDirectory: __dirname,
+});
+
+const eslintConfig = [
+  ...compat.extends("next/core-web-vitals", "next/typescript"),
+];
+
+export default eslintConfig;
+
+>>>> next.config.ts
+import type { NextConfig } from "next";
+
+const nextConfig: NextConfig = {
+  /* config options here */
+};
+
+export default nextConfig;
+
+>>>> package.json
+{
+  "name": "frontend",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev --turbopack",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "@coral-xyz/anchor": "^0.28.0",
+    "@meteora-ag/dlmm": "^1.5.2",
+    "@solana/web3.js": "^1.98.2",
+    "axios": "^1.9.0",
+    "buffer": "^6.0.3",
+    "decimal": "^0.0.2",
+    "decimal.js": "^10.5.0",
+    "dotenv": "^16.3.1",
+    "lodash.debounce": "^4.0.8",
+    "next": "15.3.2",
+    "pako": "^2.1.0",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "zustand": "^5.0.4"
+  },
+  "devDependencies": {
+    "@eslint/eslintrc": "^3",
+    "@tailwindcss/postcss": "^4",
+    "@types/bn.js": "^5.1.6",
+    "@types/decimal.js": "^0.0.32",
+    "@types/lodash.debounce": "^4.0.9",
+    "@types/node": "^20",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "eslint": "^9",
+    "eslint-config-next": "15.3.2",
+    "tailwindcss": "^4",
+    "typescript": "^5"
+  }
+}
+
+>>>> postcss.config.mjs
+const config = {
+  plugins: ["@tailwindcss/postcss"],
+};
+
+export default config;
+
+>>>> public/file.svg
+<svg fill="none" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg"><path d="M14.5 13.5V5.41a1 1 0 0 0-.3-.7L9.8.29A1 1 0 0 0 9.08 0H1.5v13.5A2.5 2.5 0 0 0 4 16h8a2.5 2.5 0 0 0 2.5-2.5m-1.5 0v-7H8v-5H3v12a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1M9.5 5V2.12L12.38 5zM5.13 5h-.62v1.25h2.12V5zm-.62 3h7.12v1.25H4.5zm.62 3h-.62v1.25h7.12V11z" clip-rule="evenodd" fill="#666" fill-rule="evenodd"/></svg>
+>>>> public/globe.svg
+<svg fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><g clip-path="url(#a)"><path fill-rule="evenodd" clip-rule="evenodd" d="M10.27 14.1a6.5 6.5 0 0 0 3.67-3.45q-1.24.21-2.7.34-.31 1.83-.97 3.1M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16m.48-1.52a7 7 0 0 1-.96 0H7.5a4 4 0 0 1-.84-1.32q-.38-.89-.63-2.08a40 40 0 0 0 3.92 0q-.25 1.2-.63 2.08a4 4 0 0 1-.84 1.31zm2.94-4.76q1.66-.15 2.95-.43a7 7 0 0 0 0-2.58q-1.3-.27-2.95-.43a18 18 0 0 1 0 3.44m-1.27-3.54a17 17 0 0 1 0 3.64 39 39 0 0 1-4.3 0 17 17 0 0 1 0-3.64 39 39 0 0 1 4.3 0m1.1-1.17q1.45.13 2.69.34a6.5 6.5 0 0 0-3.67-3.44q.65 1.26.98 3.1M8.48 1.5l.01.02q.41.37.84 1.31.38.89.63 2.08a40 40 0 0 0-3.92 0q.25-1.2.63-2.08a4 4 0 0 1 .85-1.32 7 7 0 0 1 .96 0m-2.75.4a6.5 6.5 0 0 0-3.67 3.44 29 29 0 0 1 2.7-.34q.31-1.83.97-3.1M4.58 6.28q-1.66.16-2.95.43a7 7 0 0 0 0 2.58q1.3.27 2.95.43a18 18 0 0 1 0-3.44m.17 4.71q-1.45-.12-2.69-.34a6.5 6.5 0 0 0 3.67 3.44q-.65-1.27-.98-3.1" fill="#666"/></g><defs><clipPath id="a"><path fill="#fff" d="M0 0h16v16H0z"/></clipPath></defs></svg>
+>>>> public/next.svg
+<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 394 80"><path fill="#000" d="M262 0h68.5v12.7h-27.2v66.6h-13.6V12.7H262V0ZM149 0v12.7H94v20.4h44.3v12.6H94v21h55v12.6H80.5V0h68.7zm34.3 0h-17.8l63.8 79.4h17.9l-32-39.7 32-39.6h-17.9l-23 28.6-23-28.6zm18.3 56.7-9-11-27.1 33.7h17.8l18.3-22.7z"/><path fill="#000" d="M81 79.3 17 0H0v79.3h13.6V17l50.2 62.3H81Zm252.6-.4c-1 0-1.8-.4-2.5-1s-1.1-1.6-1.1-2.6.3-1.8 1-2.5 1.6-1 2.6-1 1.8.3 2.5 1a3.4 3.4 0 0 1 .6 4.3 3.7 3.7 0 0 1-3 1.8zm23.2-33.5h6v23.3c0 2.1-.4 4-1.3 5.5a9.1 9.1 0 0 1-3.8 3.5c-1.6.8-3.5 1.3-5.7 1.3-2 0-3.7-.4-5.3-1s-2.8-1.8-3.7-3.2c-.9-1.3-1.4-3-1.4-5h6c.1.8.3 1.6.7 2.2s1 1.2 1.6 1.5c.7.4 1.5.5 2.4.5 1 0 1.8-.2 2.4-.6a4 4 0 0 0 1.6-1.8c.3-.8.5-1.8.5-3V45.5zm30.9 9.1a4.4 4.4 0 0 0-2-3.3 7.5 7.5 0 0 0-4.3-1.1c-1.3 0-2.4.2-3.3.5-.9.4-1.6 1-2 1.6a3.5 3.5 0 0 0-.3 4c.3.5.7.9 1.3 1.2l1.8 1 2 .5 3.2.8c1.3.3 2.5.7 3.7 1.2a13 13 0 0 1 3.2 1.8 8.1 8.1 0 0 1 3 6.5c0 2-.5 3.7-1.5 5.1a10 10 0 0 1-4.4 3.5c-1.8.8-4.1 1.2-6.8 1.2-2.6 0-4.9-.4-6.8-1.2-2-.8-3.4-2-4.5-3.5a10 10 0 0 1-1.7-5.6h6a5 5 0 0 0 3.5 4.6c1 .4 2.2.6 3.4.6 1.3 0 2.5-.2 3.5-.6 1-.4 1.8-1 2.4-1.7a4 4 0 0 0 .8-2.4c0-.9-.2-1.6-.7-2.2a11 11 0 0 0-2.1-1.4l-3.2-1-3.8-1c-2.8-.7-5-1.7-6.6-3.2a7.2 7.2 0 0 1-2.4-5.7 8 8 0 0 1 1.7-5 10 10 0 0 1 4.3-3.5c2-.8 4-1.2 6.4-1.2 2.3 0 4.4.4 6.2 1.2 1.8.8 3.2 2 4.3 3.4 1 1.4 1.5 3 1.5 5h-5.8z"/></svg>
+>>>> public/vercel.svg
+<svg fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1155 1000"><path d="m577.3 0 577.4 1000H0z" fill="#fff"/></svg>
+>>>> public/window.svg
+<svg fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path fill-rule="evenodd" clip-rule="evenodd" d="M1.5 2.5h13v10a1 1 0 0 1-1 1h-11a1 1 0 0 1-1-1zM0 1h16v11.5a2.5 2.5 0 0 1-2.5 2.5h-11A2.5 2.5 0 0 1 0 12.5zm3.75 4.5a.75.75 0 1 0 0-1.5.75.75 0 0 0 0 1.5M7 4.75a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0m1.75.75a.75.75 0 1 0 0-1.5.75.75 0 0 0 0 1.5" fill="#666"/></svg>
+>>>> src/app/auth-success/page.tsx
+// src/app/auth-success/page.tsx
+"use client";
+
+import React, { useEffect } from 'react';
+import { useRouter, useSearchParams } from 'next/navigation';
+
+export default function AuthSuccessPage() {
+  const router = useRouter();
+  const searchParams = useSearchParams();
+
+  useEffect(() => {
+    const token = searchParams.get('token');
+
+    if (token) {
+      // 토큰을 로컬 스토리지에 저장
+      localStorage.setItem('jwtToken', token);
+      // 대시보드로 리디렉션
+      router.replace('/dashboard'); // replace를 사용하여 뒤로가기 시 이 페이지로 돌아오지 않도록 함
+    } else {
+      // 토큰이 없는 경우 로그인 페이지로 리디렉션 또는 오류 메시지 표시
+      console.error('인증 토큰이 없습니다.');
+      router.replace('/'); // 로그인 페이지로
+    }
+  }, [router, searchParams]);
+
+  return (
+    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100">
+      <div className="p-8 bg-white shadow-md rounded-lg text-center">
+        <h1 className="text-2xl font-semibold text-gray-700 mb-4">인증 처리 중...</h1>
+        <p className="text-gray-600">잠시만 기다려주세요. 대시보드로 이동합니다.</p>
+        {/* 간단한 로딩 스피너 등을 추가할 수 있습니다 */}
+        <div className="mt-6">
+          <svg 
+            className="animate-spin h-8 w-8 text-blue-600 mx-auto" 
+            xmlns="http://www.w3.org/2000/svg" 
+            fill="none" 
+            viewBox="0 0 24 24"
+          >
+            <circle 
+              className="opacity-25" 
+              cx="12" 
+              cy="12" 
+              r="10" 
+              stroke="currentColor" 
+              strokeWidth="4"
+            ></circle>
+            <path 
+              className="opacity-75" 
+              fill="currentColor" 
+              d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+            ></path>
+          </svg>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+>>>> src/app/dashboard/page.tsx
+"use client";
+
+import React, { useState, useEffect, useCallback } from 'react';
+import { Connection, PublicKey } from '@solana/web3.js';
+import useAuthStore from '@/store/authStore';
+import { useRouter } from 'next/navigation';
+import { useDlmmPositions } from '@/hooks/useDlmmPositions'; // Import the new hook
+import LpPositionItem from '@/components/lp/LpPositionItem'; // Import LpPositionItem component
+
+export default function DashboardPage() {
+  const { user, isLoggedIn, isLoading: isAuthLoading, logout } = useAuthStore();
+  const userPublicKey = user?.solanaPublicKey ? new PublicKey(user.solanaPublicKey) : null;
+  const router = useRouter();
+
+  const [solBalance, setSolBalance] = useState<number | null>(null);
+
+  // Use the new hook to fetch positions and related data, and expose fetchPositions for manual refresh
+  const { positions, isLoading, error, totalSummary, fetchPositions } = useDlmmPositions(userPublicKey);
+
+  // Redirect if not logged in
+  useEffect(() => {
+    if (!isAuthLoading && !isLoggedIn) {
+      router.replace('/');
+    }
+  }, [isAuthLoading, isLoggedIn, router]);
+
+  // Fetch SOL balance (Still needed, uses connection)
+  useEffect(() => {
+    const fetchSolBalance = async () => {
+      if (userPublicKey) {
+        try {
+          const connection = new Connection(process.env.NEXT_PUBLIC_SOLANA_RPC_URL || 'https://api.devnet.solana.com', 'confirmed');
+          const balance = await connection.getBalance(userPublicKey);
+          setSolBalance(balance / 10 ** 9); // Convert lamports to SOL
+        } catch (e) {
+          console.error("Failed to fetch SOL balance:", e);
+          setSolBalance(null);
+        }
+      } else {
+        setSolBalance(null);
+      }
+    };
+    fetchSolBalance();
+  }, [userPublicKey]);
+
+  const handleLogout = useCallback(() => {
+      logout();
+      router.push('/');
+  }, [logout, router]);
+
+  // Placeholder functions for LP actions (can be updated later to use hook data/actions)
+  const handleExportPrivateKey = useCallback(async () => {
+      // TODO: Implement actual private key export logic
+      console.log('개인 키 내보내기 기능은 현재 초기화되었습니다.');
+  }, []);
+
+  // Check if userPublicKey is available before rendering the main content
+  if (!userPublicKey) {
+    return (
+      <div className="container mx-auto p-4 pt-20 text-center text-gray-300">
+        <p>사용자 지갑 정보를 불러오는 중입니다...</p>
+      </div>
+    );
+  }
+
+  return (
+    <div className="container mx-auto p-4 pt-20">
+      <h1 className="text-4xl font-bold text-gray-100 mb-8">대시보드</h1>
+
+      {error && (
+        <div className="bg-red-500 text-white p-4 rounded-md mb-4">
+          {error}
+        </div>
+      )}
+
+      <div className="bg-gray-700 p-6 rounded-lg shadow-xl text-gray-100 mb-8">
+          <h2 className="text-2xl font-semibold text-white mb-4">사용자 정보 및 지갑</h2>
+          {user?.id && <p>사용자 ID: {user.id}</p>}
+          {userPublicKey && <p>지갑 주소: {userPublicKey.toBase58()}</p>}
+          {solBalance !== null && <p>SOL 잔액: {solBalance?.toFixed(4)}</p>}
+          <div className="flex space-x-4 mt-4">
+              <button
+                  className="bg-green-600 hover:bg-green-700 text-white font-semibold py-2 px-4 rounded-lg transition duration-300"
+                  onClick={() => router.push('/lp/create')}
+              >
+                  새 LP 포지션 생성
+              </button>
+               <button
+                  className="bg-yellow-600 hover:bg-yellow-700 text-white font-semibold py-2 px-4 rounded-lg transition duration-300"
+                  onClick={handleExportPrivateKey}
+                  disabled={isLoading}
+              >
+                   개인 키 내보내기
+              </button>
+               <button
+                  className="bg-red-600 hover:bg-red-600 text-white font-semibold py-2 px-4 rounded-lg transition duration-300"
+                  onClick={handleLogout}
+               >
+                   로그아웃
+               </button>
+           </div>
+       </div>
+
+       <h2 className="text-2xl font-semibold text-gray-100 mb-4">나의 LP 포지션</h2>
+
+       {/* Refresh Button */}
+       <div className="mb-4">
+            <button
+                className={`bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-lg transition duration-300 ${isLoading ? 'opacity-50 cursor-not-allowed' : ''}`}
+                onClick={fetchPositions} // Call fetchPositions from the hook
+                disabled={isLoading}
+            >
+                {isLoading ? '새로고침 중...' : 'LP 포지션 새로고침'}
+            </button>
+       </div>
+
+
+      {/* Display Total Summary */}
+      <div className="bg-gray-700 p-6 rounded-lg shadow-xl text-gray-100 mb-8">
+          <h3 className="text-xl font-semibold text-white mb-4">요약</h3>
+          <p>총 포지션 수: {totalSummary.totalPositions}</p>
+          <p>범위 내 포지션 수: {totalSummary.inRangePositions}</p>
+          <p>총 유동성 가치: ${totalSummary.totalLiquidityValue.toFixed(2)}</p>
+          <p>총 미청구 수수료: ${totalSummary.totalUnclaimedFees.toFixed(2)}</p>
+          <p>총 초기 투자 가치: ${totalSummary.totalInitialValue.toFixed(2)}</p>
+
+       </div>
+
+{isLoading ? (
+        <p className="text-gray-300">LP 포지션을 불러오는 중...</p>
+      ) : error ? (
+        <div className="bg-red-500 text-white p-4 rounded-md mb-4">
+          {error}
+        </div>
+      ) : positions.length === 0 ? (
+        <p className="text-gray-300">활성화된 LP 포지션이 없습니다.</p>
+      ) : (
+        <div className="space-y-4">
+          {positions.map(position => (
+            <LpPositionItem
+              key={position.address}
+              position={position}
+            />
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}
+
+>>>> src/app/globals.css
+@import "tailwindcss";
+
+:root {
+  --background: #0F172A; /* 어두운 파란색 계열 (slate-900) */
+  --foreground: #F3F4F6; /* 밝은 회색 계열 (gray-100) */
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0F172A; /* 다크 모드도 동일한 어두운 파란색 계열 (slate-900) */
+    --foreground: #F3F4F6; /* 다크 모드도 동일한 밝은 회색 계열 (gray-100) */
+  }
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+>>>> src/app/layout.tsx
+import type { Metadata } from "next";
+import { Geist, Geist_Mono } from "next/font/google";
+import "./globals.css";
+import AuthProvider from "@/components/AuthProvider"; // AuthProvider 임포트
+
+const geistSans = Geist({
+  variable: "--font-geist-sans",
+  subsets: ["latin"],
+});
+
+const geistMono = Geist_Mono({
+  variable: "--font-geist-mono",
+  subsets: ["latin"],
+});
+
+export const metadata: Metadata = {
+  title: "DLMM WebApp", // 앱 제목 변경
+  description: "Meteora DLMM Liquidity Management",
+};
+
+export default function RootLayout({
+  children,
+}: Readonly<{
+  children: React.ReactNode;
+}>) {
+  return (
+    <html lang="ko"> {/* 언어 한국어로 변경 */}
+      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+        <AuthProvider>{children}</AuthProvider>
+      </body>
+    </html>
+  );
+}
+
+>>>> src/app/lp/create/page.tsx
+"use client";
+
+import React, { useState, useEffect, useCallback } from 'react'; // Added useCallback
+import { useRouter } from 'next/navigation';
+import useAuthStore from '@/store/authStore';
+import { StrategyType } from '@meteora-ag/dlmm';
+import Decimal from 'decimal.js';
+import { NATIVE_MINT } from '@solana/spl-token';
+
+// Import the new hooks and utility function
+import { usePoolSearch } from '@/hooks/usePoolSearch';
+import { usePriceRangeCalculation } from '@/hooks/usePriceRangeCalculation';
+import { useAssetCheck } from '@/hooks/useAssetCheck';
+import { executeLpCreation } from '@/utils/lpUtils';
+
+// Import the new step components
+import Step1PoolSelection from '@/components/lp/create/Step1PoolSelection';
+import Step2DepositSettings from '@/components/lp/create/Step2DepositSettings';
+import Step3AssetCheck from '@/components/lp/create/Step3AssetCheck';
+
+
+interface Pool {
+  poolAddress: string;
+  tokenX: string;
+  tokenY: string;
+  tokenXMint: string;
+  tokenYMint: string;
+  binStep: number;
+  baseFeeBps: number;
+  name: string;
+  liquidity: number;
+  trade_volume_24h: number;
+  current_price: number;
+}
+
+// Re-define necessary types if not imported globally or from a shared file
+interface PriceRangeResult {
+  minPrice: string;
+  maxPrice: string;
+  minBinId: number;
+  maxBinId: number;
+}
+
+interface AssetCheckResult {
+  needsSwap: boolean;
+  requiredAssets: {
+    solLamports: string;
+    targetTokenLamports: string;
+    tokenCa: string;
+    tokenDecimals: number;
+  };
+  currentBalances: {
+    solLamports: string;
+    targetTokenLamports: string;
+  };
+  swapQuote: any | null;
+}
+
+
+export default function CreateLpPage() {
+  const router = useRouter();
+  const { isLoggedIn, user, isLoading: isAuthLoading } = useAuthStore();
+
+  const [currentStep, setCurrentStep] = useState(1);
+  const [selectedPool, setSelectedPool] = useState<Pool | null>(null);
+  const [tokenCaInput, setTokenCaInput] = useState('');
+  const [totalSolValue, setTotalSolValue] = useState('');
+  const [solDepositRatioPercent, setSolDepositRatioPercent] = useState('50');
+  const [strategyType, setStrategyType] = useState<keyof typeof StrategyType>('Spot'); // Set default to 'Spot'
+  const [createLpLoading, setCreateLpLoading] = useState(false);
+  const [pageError, setPageError] = useState<string | null>(null); // Use a separate error state for the page component
+
+  // Use the custom hooks unconditionally at the top level
+  const { pools, poolsLoading, error: poolSearchError, fetchPoolsByToken, setPools, setError: setPoolSearchError } = usePoolSearch();
+  const { calculatedPriceRange, calculationLoading, calculationError } = usePriceRangeCalculation(selectedPool, totalSolValue, solDepositRatioPercent, strategyType);
+  const { assetCheckResult, assetCheckLoading, assetCheckError, handleAssetCheck: performAssetCheck, setAssetCheckResult, setAssetCheckError } = useAssetCheck();
+
+
+  // Combine errors from hooks and page-specific error
+  const combinedError = pageError || poolSearchError || calculationError || assetCheckError;
+
+  useEffect(() => {
+    if (!isAuthLoading && !isLoggedIn) {
+      router.replace('/');
+    }
+  }, [isAuthLoading, isLoggedIn, router]);
+
+  // Effect to clear asset check result when pool or deposit settings change
+  useEffect(() => {
+    setAssetCheckResult(null);
+    setAssetCheckError(null);
+  }, [selectedPool, totalSolValue, solDepositRatioPercent, strategyType, setAssetCheckResult, setAssetCheckError]);
+
+
+  const handlePoolSearch = useCallback(() => { // Added useCallback
+    setPageError(null); // Clear page error before search
+    setPools([]); // Clear previous pools
+    setSelectedPool(null); // Clear selected pool
+    setAssetCheckResult(null); // Clear asset check result
+    setAssetCheckError(null); // Clear asset check error
+    fetchPoolsByToken(tokenCaInput);
+  }, [fetchPoolsByToken, setPools, setSelectedPool, setAssetCheckResult, setAssetCheckError, tokenCaInput]); // Added dependencies
+
+
+  const handleAssetCheckStep = useCallback(async () => { // Added useCallback
+     setPageError(null); // Clear page error before asset check
+     await performAssetCheck(selectedPool, tokenCaInput, totalSolValue, solDepositRatioPercent, strategyType, calculatedPriceRange);
+     // The hook updates its internal state (assetCheckResult, assetCheckLoading, assetCheckError)
+     // We will transition step based on the result in the render logic or another effect if needed,
+     // but for simplicity, let's transition here if no immediate error from the hook call itself.
+     // Note: The hook's error state will be checked in the combinedError.
+     if (!assetCheckError && !assetCheckLoading) { // Only transition if no immediate error and not loading
+        // Check if assetCheckResult was set by the hook
+        // This might require a slight delay or checking the hook's state after the async call
+        // A better pattern might be to let the hook manage its state and react to it in the component.
+        // Let's rely on the combinedError and assetCheckResult state update.
+        // We'll transition in the render logic based on assetCheckResult being non-null.
+     }
+  }, [selectedPool, tokenCaInput, totalSolValue, solDepositRatioPercent, strategyType, calculatedPriceRange, performAssetCheck, assetCheckError, assetCheckLoading]); // Added dependencies
+
+
+  const handleExecuteCreateLp = useCallback(async () => { // Added useCallback
+    if (!selectedPool || !tokenCaInput || !totalSolValue || solDepositRatioPercent === undefined || !strategyType || !calculatedPriceRange || !assetCheckResult) {
+      setPageError('필수 정보가 누락되었습니다. 이전 단계로 돌아가 다시 시도해주세요.');
+      return;
+    }
+    setCreateLpLoading(true);
+    setPageError(null);
+    try {
+      const response = await executeLpCreation(
+        selectedPool,
+        tokenCaInput,
+        totalSolValue,
+        solDepositRatioPercent,
+        strategyType,
+        calculatedPriceRange,
+        assetCheckResult
+      );
+      alert('LP 포지션 생성 성공! 서명: ' + response.signature);
+      router.push('/dashboard');
+    } catch (error: any) {
+      console.error('LP Creation Failed (page):', error);
+      setPageError(error.message || 'LP 포지션 생성 중 알 수 없는 오류 발생');
+    } finally {
+      setCreateLpLoading(false);
+    }
+  }, [selectedPool, tokenCaInput, totalSolValue, solDepositRatioPercent, strategyType, calculatedPriceRange, assetCheckResult, router]); // Added dependencies
+
+
+  const handleBack = useCallback(() => { // Added useCallback
+    setCurrentStep(prevStep => Math.max(1, prevStep - 1));
+  }, []); // Added dependencies
+
+
+  // Determine current step based on state
+  useEffect(() => {
+    // Stay on Step 2 if selectedPool and basic deposit settings are valid, regardless of calculatedPriceRange
+    const isStep2Ready = selectedPool && totalSolValue && solDepositRatioPercent !== undefined && strategyType;
+
+    if (assetCheckResult) {
+      setCurrentStep(3);
+    } else if (isStep2Ready) {
+      setCurrentStep(2);
+    } else {
+      setCurrentStep(1);
+    }
+  }, [selectedPool, totalSolValue, solDepositRatioPercent, strategyType, calculatedPriceRange, assetCheckResult]); // Keep calculatedPriceRange in dependencies as it's used in render logic
+
+
+  const renderStep = () => {
+    switch (currentStep) {
+      case 1:
+        return (
+          <Step1PoolSelection
+            tokenCaInput={tokenCaInput}
+            setTokenCaInput={setTokenCaInput}
+            pools={pools}
+            poolsLoading={poolsLoading}
+            handlePoolSearch={handlePoolSearch}
+            selectedPool={selectedPool}
+            setSelectedPool={setSelectedPool}
+            setCurrentStep={setCurrentStep}
+          />
+        );
+      case 2:
+        return (
+          <Step2DepositSettings
+            selectedPool={selectedPool}
+            totalSolValue={totalSolValue}
+            setTotalSolValue={setTotalSolValue}
+            solDepositRatioPercent={solDepositRatioPercent}
+            setSolDepositRatioPercent={setSolDepositRatioPercent}
+            strategyType={strategyType}
+            setStrategyType={setStrategyType}
+            calculatedPriceRange={calculatedPriceRange}
+            calculationLoading={calculationLoading}
+            setCurrentStep={setCurrentStep}
+            handleAssetCheckStep={handleAssetCheckStep}
+            assetCheckLoading={assetCheckLoading} // Pass assetCheckLoading to disable button
+          />
+        );
+      case 3:
+        return (
+          <Step3AssetCheck
+            assetCheckResult={assetCheckResult}
+            assetCheckLoading={assetCheckLoading}
+            createLpLoading={createLpLoading}
+            handleExecuteCreateLp={handleExecuteCreateLp}
+            setCurrentStep={setCurrentStep}
+            setAssetCheckResult={setAssetCheckResult}
+          />
+        );
+      default:
+        return null;
+    }
+  };
+
+  return (
+    <div className="container mx-auto p-4 pt-20">
+      <div className="flex justify-between items-center mb-8">
+        <h1 className="text-4xl font-bold text-gray-100">LP 포지션 생성</h1>
+      </div>
+
+      {combinedError && (
+        <div className="bg-red-500 text-white p-4 rounded-md mb-4">
+          {combinedError}
+        </div>
+      )}
+
+      <div className="bg-orange-700 p-6 rounded-lg shadow-xl text-gray-100 mb-8">
+        {renderStep()}
+      </div>
+    </div>
+  );
+}
+
+>>>> src/app/page.tsx
+import Link from 'next/link';
+
+export default function LoginPage() {
+  const backendUrl = process.env.NEXT_PUBLIC_BACKEND_URL || 'http://localhost:5000';
+  const googleLoginUrl = `${backendUrl}/api/auth/google`;
+
+  return (
+    <div className="flex flex-col items-center justify-center min-h-screen"> {/* 배경색은 globals.css에서 var(--background)로 이미 어두운 파란색 적용됨 */}
+      <div className="p-8 bg-orange-700 shadow-xl rounded-lg max-w-md w-full"> {/* "윈도우창" 배경색 변경 */}
+        <h1 className="text-3xl font-bold text-center text-white mb-8"> {/* 글자색 변경 */}
+          DLMM WebApp에 오신 것을 환영합니다!
+        </h1>
+        <p className="text-center text-gray-200 mb-8"> {/* 글자색 변경 */}
+          시작하려면 구글 계정으로 로그인해주세요.
+        </p>
+        <Link
+          href={googleLoginUrl}
+          className="w-full bg-sky-600 hover:bg-sky-700 text-white font-semibold py-3 px-6 rounded-lg text-center transition duration-300 ease-in-out transform hover:scale-105 inline-block" /* 버튼 색상 변경 */
+        >
+          구글 계정으로 로그인
+        </Link>
+      </div>
+      <footer className="mt-12 text-center text-sm text-gray-400"> {/* 푸터 글자색 변경 */}
+        <p>&copy; {new Date().getFullYear()} DLMM Project. All rights reserved.</p>
+      </footer>
+    </div>
+  );
+}
+
+>>>> src/components/AuthProvider.tsx
+// src/components/AuthProvider.tsx
+"use client";
+
+import React, { useEffect } from 'react';
+import useAuthStore from '@/store/authStore';
+
+interface AuthProviderProps {
+  children: React.ReactNode;
+}
+
+export default function AuthProvider({ children }: AuthProviderProps) {
+  useEffect(() => {
+    // 앱이 처음 로드될 때 한 번만 인증 상태 초기화
+    useAuthStore.getState().initializeAuth();
+  }, []);
+
+  return <>{children}</>;
+}
+
+>>>> src/components/lp/LpPositionItem.tsx
+"use client";
+
+import React, { useState } from 'react'; // Import useState
+import { LpPosition } from '@/types/dlmm'; // Import the updated LpPosition type
+import { PublicKey } from '@solana/web3.js'; // Import necessary Solana types
+import useAuthStore from '@/store/authStore'; // Import useAuthStore
+import Decimal from 'decimal.js'; // For calculations
+import { removeLiquidityPosition } from '@/lib/api'; // Import the API function
+
+interface LpPositionItemProps {
+  position: LpPosition;
+  // onPositionRemoved?: (positionAddress: string) => void; // Optional callback if needed by parent
+}
+
+// Helper to convert lamports to UI amount (can be shared or defined here)
+// This helper is now primarily used for transaction building amounts if needed,
+// as display amounts come pre-calculated from the backend.
+function lamportsToUiAmount(lamports: string | number | bigint | undefined | null, decimals: number | undefined | null): string {
+    if (lamports === undefined || lamports === null || decimals === undefined || decimals === null) return '0';
+    try {
+        const amountDecimal = new Decimal(lamports.toString()).div(new Decimal(10).pow(decimals));
+        return amountDecimal.toFixed(Math.min(decimals, 6)); // Example: show up to 6 decimals
+    } catch (e) {
+        console.error("Error formatting amount:", e);
+        return 'Error';
+    }
+}
+
+export default function LpPositionItem({ position }: LpPositionItemProps) {
+  // Get userPublicKey from auth store
+  const { user } = useAuthStore();
+  const userPublicKey = user?.solanaPublicKey ? new PublicKey(user.solanaPublicKey) : null;
+
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  const [isRemoved, setIsRemoved] = useState(false); // State to track if position is removed
+
+  // Display details are now received directly in the position prop
+  // No need for a separate state or useEffect for calculations
+
+  // useEffect(() => {
+  //     // Calculation logic moved to backend
+  // }, [position, connection]);
+
+  const handleRemoveLiquidity = async () => {
+    setIsLoading(true);
+    setError(null);
+    try {
+      // Call the original backend for LP removal
+      // The original backend will retrieve the private key and forward to the new backend
+      await removeLiquidityPosition(position.address, position.pair_address);
+      setIsRemoved(true); // Mark as removed on success
+      console.log(`LP Position ${position.address} removal request sent.`);
+      // Optionally, trigger a refresh of the positions list in the parent component
+      // if (onPositionRemoved) {
+      //   onPositionRemoved(position.address);
+      // }
+    } catch (e: any) {
+      console.error("Error requesting LP position removal:", e);
+      setError(e.message || "Failed to request LP position removal.");
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  // Don't render the item if it's been removed
+  if (isRemoved) {
+    return null;
+  }
+
+  return (
+    <div className="bg-gray-800 p-4 rounded-lg mb-4">
+      <h3 className="text-lg font-semibold text-white mb-2">LP 포지션: {position.address.slice(0, 6)}...{position.address.slice(-6)}</h3>
+      <p className="text-gray-300">풀: {position.pair_address.slice(0, 6)}...{position.pair_address.slice(-6)}</p>
+
+      {/* Display calculated details from backend */}
+      <p className="text-gray-300">가격 범위: {position.priceRange}</p>
+      <p className="text-gray-300">총 가치 (SOL): {position.totalValueInSol}</p>
+      <p className="text-gray-300">
+        예치 금액: {position.totalXAmountUi} ({position.tokenXMint.slice(0, 4)}...) / {position.totalYAmountUi} ({position.tokenYMint.slice(0, 4)}...)
+      </p>
+      <p className="text-gray-300">
+        미청구 수수료: {position.pendingFeeXUi} ({position.tokenXMint.slice(0, 4)}...) / {position.pendingFeeYUi} ({position.tokenYMint.slice(0, 4)}...)
+      </p>
+      {position.pendingRewardsUi.map((reward, index) => (
+        <p key={index} className="text-gray-300">
+          미청구 보상 {index + 1}: {reward.amount} ({reward.mint.slice(0, 4)}...)
+        </p>
+      ))}
+
+      {error && (
+        <div className="bg-red-500 text-white p-2 rounded-md mt-2">
+          {error}
+        </div>
+      )}
+
+      <div className="flex space-x-2 mt-4">
+        <button
+          className={`bg-red-600 hover:bg-red-700 text-white font-semibold py-2 px-4 rounded-lg transition duration-300 ${isLoading ? 'opacity-50 cursor-not-allowed' : ''}`}
+          onClick={handleRemoveLiquidity}
+          disabled={isLoading}
+        >
+          {isLoading ? 'LP 해제 중...' : 'LP 해제'}
+        </button>
+        {/* You can add the "Remove and Swap" button back here if needed */}
+      </div>
+    </div>
+  );
+}
+
+>>>> src/components/lp/create/Step1PoolSelection.tsx
+import React from 'react';
+import { StrategyType } from '@meteora-ag/dlmm'; // Keep import if needed for types
+
+interface Pool {
+  poolAddress: string;
+  tokenX: string;
+  tokenY: string;
+  tokenXMint: string;
+  tokenYMint: string;
+  binStep: number;
+  baseFeeBps: number;
+  name: string;
+  liquidity: number;
+  trade_volume_24h: number;
+  current_price: number;
+}
+
+interface Step1PoolSelectionProps {
+  tokenCaInput: string;
+  setTokenCaInput: (value: string) => void;
+  pools: Pool[];
+  poolsLoading: boolean;
+  handlePoolSearch: () => void;
+  selectedPool: Pool | null;
+  setSelectedPool: (pool: Pool | null) => void;
+  setCurrentStep: (step: number) => void;
+}
+
+export default function Step1PoolSelection({
+  tokenCaInput,
+  setTokenCaInput,
+  pools,
+  poolsLoading,
+  handlePoolSearch,
+  selectedPool,
+  setSelectedPool,
+  setCurrentStep,
+}: Step1PoolSelectionProps) {
+  return (
+    <>
+      <h2 className="text-2xl font-semibold text-white mb-4">단계 1: 토큰 선택 및 풀 검색</h2>
+      <div className="mb-4">
+        <label htmlFor="tokenCaInput" className="block text-gray-300 text-sm font-bold mb-2">
+          대상 토큰 (Y) 민트 주소:
+        </label>
+        <input
+          type="text"
+          id="tokenCaInput"
+          className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+          value={tokenCaInput}
+          onChange={(e) => setTokenCaInput(e.target.value)}
+          placeholder="예: 대상 토큰 민트 주소"
+        />
+        <button
+          className="mt-2 bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-lg transition duration-300"
+          onClick={handlePoolSearch}
+          disabled={poolsLoading}
+        >
+          {poolsLoading ? '풀 검색 중...' : '풀 검색'}
+        </button>
+      </div>
+      {poolsLoading ? (
+        <p>풀 목록을 불러오는 중...</p>
+      ) : pools.length === 0 && tokenCaInput ? (
+        <p>입력하신 토큰 페어에 해당하는 풀을 찾을 수 없습니다.</p>
+      ) : pools.length > 0 ? (
+        <div className="mb-4">
+          <label htmlFor="poolSelect" className="block text-gray-300 text-sm font-bold mb-2">
+            풀 선택:
+          </label>
+          <select
+            id="poolSelect"
+            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            value={selectedPool?.poolAddress || ''}
+            onChange={(e) => {
+              const pool = pools.find(p => p.poolAddress === e.target.value);
+              setSelectedPool(pool || null);
+            }}
+          >
+            <option value="" disabled>풀을 선택해주세요</option>
+            {pools.map(pool => (
+              <option key={pool.poolAddress} value={pool.poolAddress}>
+                {`${pool.name || `${pool.tokenX.substring(0, 4)}/${pool.tokenY.substring(0, 4)}`} - Bin Step: ${pool.binStep} - Base Fee: ${pool.baseFeeBps / 100}% - Liquidity: ${pool.liquidity.toFixed(2)} - 24h Volume: ${pool.trade_volume_24h.toFixed(2)}`}
+              </option>
+            ))}
+          </select>
+        </div>
+      ) : null}
+      <button
+        className="bg-green-600 hover:bg-green-700 text-white font-semibold py-2 px-4 rounded-lg transition duration-300"
+        onClick={() => setCurrentStep(2)}
+        disabled={!selectedPool || poolsLoading}
+      >
+        다음
+      </button>
+    </>
+  );
+}
+
+>>>> src/components/lp/create/Step2DepositSettings.tsx
+import React from 'react';
+import { StrategyType } from '@meteora-ag/dlmm';
+
+interface Pool {
+  poolAddress: string;
+  binStep: number;
+  current_price: number;
+  name: string;
+  // Include other necessary pool properties
+}
+
+interface PriceRangeResult {
+  minPrice: string;
+  maxPrice: string;
+  minBinId: number;
+  maxBinId: number;
+}
+
+interface Step2DepositSettingsProps {
+  selectedPool: Pool | null;
+  totalSolValue: string;
+  setTotalSolValue: (value: string) => void;
+  solDepositRatioPercent: string;
+  setSolDepositRatioPercent: (value: string) => void;
+  strategyType: keyof typeof StrategyType;
+  setStrategyType: (value: keyof typeof StrategyType) => void;
+  calculatedPriceRange: PriceRangeResult | null;
+  calculationLoading: boolean;
+  setCurrentStep: (step: number) => void;
+  handleAssetCheckStep: () => Promise<void>;
+  assetCheckLoading: boolean; // Need this to disable the button
+}
+
+export default function Step2DepositSettings({
+  selectedPool,
+  totalSolValue,
+  setTotalSolValue,
+  solDepositRatioPercent,
+  setSolDepositRatioPercent,
+  strategyType,
+  setStrategyType,
+  calculatedPriceRange,
+  calculationLoading,
+  setCurrentStep,
+  handleAssetCheckStep,
+  assetCheckLoading,
+}: Step2DepositSettingsProps) {
+  console.log('[Step2DepositSettings] Rendering. selectedPool:', selectedPool, 'totalSolValue:', totalSolValue, 'solDepositRatioPercent:', solDepositRatioPercent, 'strategyType:', strategyType, 'calculatedPriceRange:', calculatedPriceRange);
+
+  const strategies: (keyof typeof StrategyType)[] = ['Spot', 'Curve', 'BidAsk']; // Corrected 'Bid-Ask' to 'BidAsk'
+
+  return (
+    <>
+      <h2 className="text-2xl font-semibold text-white mb-4">단계 2: 예치 설정</h2>
+      {selectedPool && (
+        <div className="mb-4 p-3 bg-gray-800 rounded">
+          <p><strong>선택된 풀:</strong> {selectedPool.name || selectedPool.poolAddress}</p>
+          <p><strong>Bin Step:</strong> {selectedPool.binStep}</p>
+          <p><strong>현재 가격 (Y/X):</strong> {selectedPool.current_price !== undefined ? selectedPool.current_price.toFixed(10) : 'N/A'}</p>
+        </div>
+      )}
+      <div className="mb-4">
+        <label htmlFor="totalSolValue" className="block text-gray-300 text-sm font-bold mb-2">
+          총 예치 가치 (SOL 기준):
+        </label>
+        <input
+          type="number"
+          id="totalSolValue"
+          className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+          value={totalSolValue}
+          onChange={(e) => setTotalSolValue(e.target.value)}
+          placeholder="예: 10"
+          min="0"
+          step="any"
+        />
+      </div>
+      <div className="mb-4">
+        <label htmlFor="solDepositRatio" className="block text-gray-300 text-sm font-bold mb-2">
+          SOL 예치 비율 (%): {solDepositRatioPercent}%
+        </label>
+        <input
+          type="range"
+          id="solDepositRatio"
+          className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer dark:bg-gray-700"
+          min="0"
+          max="100"
+          value={solDepositRatioPercent}
+          onChange={(e) => setSolDepositRatioPercent(e.target.value)}
+        />
+      </div>
+      <div className="mb-4">
+        <label className="block text-gray-300 text-sm font-bold mb-2">
+          전략 선택:
+        </label>
+        <div className="flex space-x-2">
+          {strategies.map(s => (
+            <button
+              key={s}
+              className={`py-2 px-4 rounded-lg transition duration-300 ${
+                strategyType === s ? 'bg-blue-600 text-white' : 'bg-gray-600 text-gray-300 hover:bg-gray-700'
+              }`}
+              onClick={() => setStrategyType(s)}
+            >
+              {s}
+            </button>
+          ))}
+        </div>
+      </div>
+
+      {calculationLoading && <p className="text-gray-400">가격 범위 계산 중...</p>}
+      {!calculationLoading && calculatedPriceRange && (
+        <div className="mb-4 text-green-400">
+          <p><strong>계산된 가격 범위 (Y/X):</strong> {parseFloat(calculatedPriceRange.minPrice).toFixed(10)} ~ {parseFloat(calculatedPriceRange.maxPrice).toFixed(10)}</p>
+        </div>
+      )}
+      {!calculationLoading && !calculatedPriceRange && parseFloat(totalSolValue) > 0 && (
+           <p className="text-yellow-400">가격을 계산 중이거나, 입력값을 확인해주세요.</p>
+      )}
+      {!calculationLoading && !calculatedPriceRange && (!totalSolValue || parseFloat(totalSolValue) <= 0) && (
+        <div className="mb-4 text-gray-400">
+         <p><strong>가격 범위:</strong> 총 예치 가치를 입력하시면 가격 범위가 자동 계산됩니다.</p>
+        </div>
+      )}
+
+      <div className="flex space-x-4 mt-6">
+        <button
+          className="bg-gray-600 hover:bg-gray-700 text-white font-semibold py-2 px-4 rounded-lg transition duration-300"
+          onClick={() => setCurrentStep(1)}
+        >
+          이전 (풀 선택)
+        </button>
+        <button
+          className={`bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-lg transition duration-300 ${assetCheckLoading || calculationLoading || !selectedPool || !totalSolValue || !strategyType || !calculatedPriceRange ? 'opacity-50 cursor-not-allowed' : ''}`}
+          onClick={handleAssetCheckStep}
+          disabled={assetCheckLoading || calculationLoading || !selectedPool || !totalSolValue || !strategyType || !calculatedPriceRange}
+        >
+          {assetCheckLoading ? '자산 확인 중...' : '다음 (자산 확인)'}
+        </button>
+      </div>
+    </>
+  );
+}
+
+>>>> src/components/lp/create/Step3AssetCheck.tsx
+import React from 'react';
+import Decimal from 'decimal.js'; // Import Decimal for formatting
+
+interface AssetCheckResult {
+  needsSwap: boolean;
+  requiredAssets: {
+    solLamports: string;
+    targetTokenLamports: string;
+    tokenCa: string;
+    tokenDecimals: number;
+  };
+  currentBalances: {
+    solLamports: string;
+    targetTokenLamports: string;
+  };
+  swapQuote: any | null; // Define a more specific type if possible
+}
+
+interface Step3AssetCheckProps {
+  assetCheckResult: AssetCheckResult | null;
+  assetCheckLoading: boolean; // Need this to show loading state
+  createLpLoading: boolean; // Need this to disable the button
+  handleExecuteCreateLp: () => Promise<void>;
+  setCurrentStep: (step: number) => void;
+  setAssetCheckResult: (result: AssetCheckResult | null) => void; // Need this to go back
+}
+
+export default function Step3AssetCheck({
+  assetCheckResult,
+  assetCheckLoading,
+  createLpLoading,
+  handleExecuteCreateLp,
+  setCurrentStep,
+  setAssetCheckResult,
+}: Step3AssetCheckProps) {
+
+  if (assetCheckLoading || !assetCheckResult) {
+      // This component should ideally only render when assetCheckResult is available,
+      // but handle loading/null state defensively.
+      return <p>자산 정보를 불러오는 중...</p>;
+  }
+
+  const formatDisplayAmount = (lamports: string, decimals: number | undefined) => {
+      if (!lamports || decimals === undefined) return 'N/A';
+      try {
+          const amountDecimal = new Decimal(lamports).div(new Decimal(10).pow(decimals));
+          return amountDecimal.toFixed(decimals); // Display with full precision or adjust as needed
+      } catch (e) {
+          console.error("Error formatting amount:", e);
+          return 'Error';
+      }
+  };
+
+  const requiredSolDisplay = formatDisplayAmount(assetCheckResult.requiredAssets?.solLamports, 9);
+  const requiredTargetDisplay = formatDisplayAmount(assetCheckResult.requiredAssets?.targetTokenLamports, assetCheckResult.requiredAssets?.tokenDecimals);
+
+  const currentSolDisplay = assetCheckResult.currentBalances ? formatDisplayAmount(assetCheckResult.currentBalances.solLamports, 9) : 'N/A';
+  const currentTargetDisplay = assetCheckResult.currentBalances ? formatDisplayAmount(assetCheckResult.currentBalances.targetTokenLamports, assetCheckResult.requiredAssets?.tokenDecimals) : 'N/A';
+
+
+  return (
+    <>
+      <h2 className="text-2xl font-semibold text-white mb-6">단계 3: 자산 확인 및 스왑 동의</h2>
+      <div className="space-y-4 mb-6 p-4 bg-gray-800 rounded-lg">
+        <div>
+          <h3 className="text-lg font-semibold text-sky-400 mb-1">필요 자산:</h3>
+          <p>SOL: {requiredSolDisplay}</p>
+          <p>대상 토큰 ({assetCheckResult.requiredAssets?.tokenCa?.substring(0,6)}...): {requiredTargetDisplay}</p>
+        </div>
+        <div>
+          <h3 className="text-lg font-semibold text-green-400 mb-1">현재 잔액 (서버 조회):</h3>
+          <p>SOL: {currentSolDisplay}</p>
+          <p>대상 토큰 ({assetCheckResult.requiredAssets?.tokenCa?.substring(0,6)}...): {currentTargetDisplay}</p>
+        </div>
+
+        {assetCheckResult.needsSwap && (
+          <div className="mt-4 p-3 bg-yellow-900 bg-opacity-50 rounded border border-yellow-700">
+            <p className="text-yellow-400 font-semibold mb-2">알림: 자산이 부족하여 자동 스왑을 진행합니다.</p>
+            {/* Display swap quote details more user-friendly */}
+            {assetCheckResult.swapQuote ? (
+              <div className="text-sm text-yellow-500">
+                <p>스왑 경로: {assetCheckResult.swapQuote.routePlan?.map((route: any) => route.swapInfo.label).join(' -> ') || 'N/A'}</p>
+                <p>입력량: {formatDisplayAmount(assetCheckResult.swapQuote.inAmount, assetCheckResult.swapQuote.inTokenInfo?.decimals || 9)} {assetCheckResult.swapQuote.inTokenInfo?.symbol || 'Input Token'}</p>
+                <p>출력량: {formatDisplayAmount(assetCheckResult.swapQuote.outAmount, assetCheckResult.swapQuote.outTokenInfo?.decimals || 9)} {assetCheckResult.swapQuote.outTokenInfo?.symbol || 'Output Token'}</p>
+                <p>최소 출력량 (슬리피지 포함): {formatDisplayAmount(assetCheckResult.swapQuote.outAmountWithSlippage, assetCheckResult.swapQuote.outTokenInfo?.decimals || 9)} {assetCheckResult.swapQuote.outTokenInfo?.symbol || 'Output Token'}</p>
+                {/* Add more relevant quote details */}
+              </div>
+            ) : (
+              <p className="text-sm text-yellow-500">스왑 견적 정보를 불러오지 못했습니다.</p>
+            )}
+          </div>
+        )}
+         {!assetCheckResult.needsSwap && (
+           <div className="mt-4 p-3 bg-green-900 bg-opacity-50 rounded border border-green-700">
+              <p className="text-green-400 font-semibold">필요한 자산이 충분합니다. 스왑 없이 LP 생성이 가능합니다.</p>
+           </div>
+         )}
+      </div>
+
+      <div className="flex space-x-4 mt-8">
+        <button
+          className="bg-gray-600 hover:bg-gray-700 text-white font-semibold py-2 px-4 rounded-lg transition duration-300"
+          onClick={() => { setAssetCheckResult(null); setCurrentStep(2); }}
+        >
+          이전 (예치 설정)
+        </button>
+        <button
+          className={`bg-emerald-600 hover:bg-emerald-700 text-white font-semibold py-2 px-4 rounded-lg transition duration-300 ${createLpLoading ? 'opacity-50 cursor-not-allowed' : ''}`}
+          onClick={handleExecuteCreateLp}
+          disabled={createLpLoading}
+        >
+          {createLpLoading ? 'LP 생성 중...' : (assetCheckResult.needsSwap ? '자동 스왑 후 LP 생성' : 'LP 포지션 생성')}
+        </button>
+      </div>
+    </>
+  );
+}
+
+>>>> src/hooks/useAssetCheck.ts
+import { useState, useCallback } from 'react';
+import apiClient from '@/lib/api';
+import { StrategyType } from '@meteora-ag/dlmm';
+
+interface Pool {
+  poolAddress: string;
+  current_price: number; // Added current_price
+  // Include other necessary pool properties
+}
+
+interface PriceRangeResult {
+  minBinId: number;
+  maxBinId: number;
+  minPrice: string; // Include minPrice and maxPrice as they are passed to the backend
+  maxPrice: string;
+}
+
+interface AssetCheckResult {
+  needsSwap: boolean;
+  requiredAssets: {
+    solLamports: string;
+    targetTokenLamports: string;
+    tokenCa: string;
+    tokenDecimals: number;
+  };
+  currentBalances: {
+    solLamports: string;
+    targetTokenLamports: string;
+  };
+  swapQuote: any | null; // Define a more specific type if possible
+}
+
+interface UseAssetCheck {
+  assetCheckResult: AssetCheckResult | null;
+  assetCheckLoading: boolean;
+  assetCheckError: string | null;
+  handleAssetCheck: (
+    selectedPool: Pool | null,
+    tokenCaInput: string,
+    totalSolValue: string,
+    solDepositRatioPercent: string,
+    strategyType: keyof typeof StrategyType,
+    calculatedPriceRange: PriceRangeResult | null
+  ) => Promise<void>;
+  setAssetCheckResult: (result: AssetCheckResult | null) => void; // Allow resetting from outside
+  setAssetCheckError: (error: string | null) => void; // Allow setting error from outside
+}
+
+export function useAssetCheck(): UseAssetCheck {
+  const [assetCheckResult, setAssetCheckResult] = useState<AssetCheckResult | null>(null);
+  const [assetCheckLoading, setAssetCheckLoading] = useState(false);
+  const [assetCheckError, setAssetCheckError] = useState<string | null>(null);
+
+  const handleAssetCheck = useCallback(
+    async (
+      selectedPool: Pool | null,
+      tokenCaInput: string,
+      totalSolValue: string,
+      solDepositRatioPercent: string,
+      strategyType: keyof typeof StrategyType,
+      calculatedPriceRange: PriceRangeResult | null
+    ) => {
+      if (!selectedPool || !tokenCaInput || !totalSolValue || solDepositRatioPercent === undefined || !strategyType || !calculatedPriceRange || calculatedPriceRange.minBinId === undefined || calculatedPriceRange.maxBinId === undefined) {
+        setAssetCheckError('모든 필수 정보를 입력하고 가격 범위를 계산해주세요.');
+        return;
+      }
+      setAssetCheckLoading(true);
+        setAssetCheckError(null);
+        setAssetCheckResult(null);
+        try {
+          const response = await apiClient.post('/api/dlmm/lp/create', {
+            poolAddress: selectedPool.poolAddress,
+            tokenCa: tokenCaInput,
+            totalSolValue: totalSolValue,
+            solDepositRatioPercent: solDepositRatioPercent,
+            strategyType: strategyType,
+            currentPrice: selectedPool.current_price, // Pass current_price from frontend
+            minBinId: calculatedPriceRange.minBinId, // These Bin IDs are for reference/logging on backend
+            maxBinId: calculatedPriceRange.maxBinId, // These Bin IDs are for reference/logging on backend
+            targetMinPrice: calculatedPriceRange.minPrice, // Pass target prices for backend calculation
+            targetMaxPrice: calculatedPriceRange.maxPrice, // Pass target prices for backend calculation
+            executeLpCreation: false, // Indicate this is an asset check, not execution
+          });
+          // Check for the new status field
+          if (response.data && response.data.status === 'success') {
+              setAssetCheckResult(response.data as AssetCheckResult);
+              // Note: The component using this hook will handle the step transition based on the result
+          } else {
+              // Handle cases where status is not 'success' or response structure is unexpected
+              console.error('Asset Check Failed: Unexpected response structure or status', response.data);
+              setAssetCheckError(`자산 확인 실패: 예상치 못한 응답 형식`);
+          }
+        } catch (error: any) {
+          console.error('Asset Check Failed (useAssetCheck):', error);
+          setAssetCheckError(`자산 확인 실패: ${error.response?.data?.message || error.message}`);
+        } finally {
+          setAssetCheckLoading(false);
+        }
+      },
+      [] // Dependencies: This function depends on parameters passed to it, not external state
+    );
+
+  return {
+    assetCheckResult,
+    assetCheckLoading,
+    assetCheckError,
+    handleAssetCheck,
+    setAssetCheckResult,
+    setAssetCheckError,
+  };
+}
+
+>>>> src/hooks/useDlmmPositions.ts
+import { useState, useEffect, useCallback, useRef } from 'react';
+import { Connection, PublicKey } from '@solana/web3.js';
+import DLMM from '@meteora-ag/dlmm';
+import BN from 'bn.js';
+import axios from 'axios';
+import Decimal from 'decimal.js'; // Assuming Decimal.js is used for calculations
+import { getMint } from '@solana/spl-token'; // Import getMint
+
+// Define interfaces for data structure
+interface LpPositionDetail {
+    address: string;
+    pair_address: string;
+    owner: string;
+    total_fee_usd_claimed: number;
+    total_reward_usd_claimed: number;
+    fee_apy_24h: number;
+    fee_apr_24h: number;
+    daily_fee_yield: number;
+    lowerBinId: number;
+    upperBinId: number;
+    binStep: number;
+    tokenXMint: string;
+    tokenYMint: string;
+    tokenXDecimals: number;
+    tokenYDecimals: number;
+    totalXAmount: bigint; // Use bigint for raw amounts
+    totalYAmount: bigint; // Use bigint for raw amounts
+    pendingFeeX: bigint; // Use bigint for raw amounts
+    pendingFeeY: bigint; // Use bigint for raw amounts
+    pendingRewards: { mint: string; amount: bigint }[]; // Use bigint for amounts
+    totalXAmountUi: string;
+    totalYAmountUi: string;
+    pendingFeeXUi: string;
+    pendingFeeYUi: string;
+    pendingRewardsUi: { amount: string; mint: string }[];
+    priceRange: string;
+    totalValueInSol: string;
+    isInRange: boolean;
+    currentBinId: number;
+    tokenXPrice: number;
+    tokenYPrice: number;
+    claimedValue: number;
+    unclaimedValue: number;
+    positionValue: number;
+    totalCurrentValue: number;
+    depositInfo: any; // Placeholder for deposit info structure
+    dynamicFee: number | null;
+}
+
+interface DlmmPositionsHook {
+    positions: LpPositionDetail[];
+    isLoading: boolean;
+    error: string | null;
+    totalSummary: {
+        totalLiquidityValue: number;
+        totalClaimedFees: number;
+        totalUnclaimedFees: number;
+        totalPositions: number;
+        inRangePositions: number;
+        totalInitialValue: number;
+        totalPnL: number;
+        totalPnLPercentage: number;
+    };
+    fetchPositions: () => Promise<void>; // Add fetchPositions to the interface
+}
+
+// Configuration options (adapted for frontend environment variables)
+const CONFIG = {
+    SOL_TOKEN_ADDRESS: "So11111111111111111111111111111111111111112",
+    RANGE_BAR_WIDTH: 20,
+    UPDATE_INTERVAL: 60000, // 1 minute
+    ERROR_RETRY_DELAY: 5000,
+    RPC_ENDPOINT: process.env.NEXT_PUBLIC_SOLANA_RPC_URL || 'https://api.devnet.solana.com',
+};
+
+// Helper function to get token price from Jupiter API
+async function getTokenPrice(tokenMint: string): Promise<number> {
+    if (!tokenMint) {
+        console.error('getTokenPrice: tokenMint is undefined or null');
+        return 0;
+    }
+    try {
+        const response = await axios.get(`https://api.jup.ag/price/v2?ids=${tokenMint}`);
+        return response.data.data[tokenMint]?.price ? parseFloat(response.data.data[tokenMint].price) : 0;
+    } catch (error) {
+        console.error('Error fetching price:', error);
+        return 0;
+    }
+}
+
+// Helper function to get token name from Gecko Terminal
+async function getTokenName(tokenMint: string): Promise<string> {
+     if (!tokenMint) {
+        console.error('getTokenName: tokenMint is undefined or null');
+        return tokenMint ? tokenMint.slice(0, 4) + '...' + tokenMint.slice(-4) : 'Unknown Token';
+    }
+    try {
+        const response = await axios.get(`https://api.geckoterminal.com/api/v2/networks/solana/tokens/${tokenMint}`);
+        return response.data.data?.attributes?.name || (tokenMint ? tokenMint.slice(0, 4) + '...' + tokenMint.slice(-4) : 'Unknown Token');
+    } catch (error) {
+        console.error('Error fetching token name:', error);
+        return tokenMint ? tokenMint.slice(0, 4) + '...' + tokenMint.slice(-4) : 'Unknown Token';
+    }
+}
+
+
+// Helper function to convert lamports to token amount
+function lamportsToTokenAmount(lamports: BN, decimals: number): number {
+    if (lamports === undefined || lamports === null || decimals === undefined || decimals === null) return 0;
+    try {
+        const divisor = new Decimal(10).pow(decimals);
+        const amountDecimal = new Decimal(lamports.toString()).div(divisor);
+        return amountDecimal.toNumber();
+    } catch (err) {
+        console.error('Error in lamportsToTokenAmount:', err);
+        return 0;
+    }
+}
+
+// Helper function to fetch initial deposit information
+async function getInitialDeposit(positionAddress: string): Promise<any> {
+     if (!positionAddress) {
+        console.error('getInitialDeposit: positionAddress is undefined or null');
+        return null;
+    }
+    try {
+        const response = await axios.get(`https://dlmm-api.meteora.ag/position/${positionAddress}/deposits`);
+        const deposits = response.data;
+
+        if (deposits && deposits.length > 0) {
+            const deposit = deposits[0]; // Get the first deposit
+            const timestamp = new Date(deposit.onchain_timestamp * 1000).toLocaleString();
+
+            return {
+                tokenXAmount: deposit.token_x_amount,
+                tokenYAmount: deposit.token_y_amount,
+                tokenXUsdAmount: deposit.token_x_usd_amount,
+                tokenYUsdAmount: deposit.token_y_usd_amount,
+                timestamp: timestamp,
+                price: deposit.price,
+                onchain_timestamp: deposit.onchain_timestamp,
+            };
+        }
+        return null;
+    } catch (error) {
+        console.error('Error fetching deposit information:', error);
+        return null;
+    }
+}
+
+// Helper function to get current dynamic fee
+async function getCurrentDynamicFee(poolAddress: string): Promise<number | null> {
+     if (!poolAddress) {
+        console.error('getCurrentDynamicFee: poolAddress is undefined or null');
+        return null;
+    }
+    try {
+        const response = await axios.get(`https://dlmm-api.meteora.ag/pair/${poolAddress}`);
+        const data = response.data;
+
+        const baseFee = parseFloat(data.base_fee_percentage);
+        // const maxFee = parseFloat(data.max_fee_percentage); // Not used in original logic
+
+        return baseFee;
+
+    } catch (error) {
+        console.error('Error fetching dynamic fee:', error);
+        return null;
+    }
+}
+
+
+export const useDlmmPositions = (userPublicKey: PublicKey | null | undefined): DlmmPositionsHook => {
+    const [positions, setPositions] = useState<LpPositionDetail[]>([]);
+    const [isLoading, setIsLoading] = useState(true);
+    const [error, setError] = useState<string | null>(null);
+    const fetchedPublicKeyRef = useRef<string | null>(null); // Ref to track the public key for which data has been fetched
+    const [totalSummary, setTotalSummary] = useState({
+        totalLiquidityValue: 0,
+        totalClaimedFees: 0,
+        totalUnclaimedFees: 0,
+        totalPositions: 0,
+        inRangePositions: 0,
+        totalInitialValue: 0,
+        totalPnL: 0,
+        totalPnLPercentage: 0,
+    });
+
+
+    const fetchPositions = useCallback(async () => {
+        if (!userPublicKey) {
+            setPositions([]);
+            setIsLoading(false);
+            return;
+        }
+
+        setIsLoading(true);
+        setError(null);
+
+        const fetchedPositions: LpPositionDetail[] = [];
+        let totalLiquidityValue = 0;
+        let totalClaimedFees = 0;
+        let totalUnclaimedFees = 0;
+        let totalPositions = 0;
+        let inRangePositions = 0;
+        let totalInitialValue = 0;
+
+
+        try {
+            const connection = new Connection(CONFIG.RPC_ENDPOINT, 'confirmed');
+            const userPositionsMap = await DLMM.getAllLbPairPositionsByUser(
+                connection,
+                userPublicKey
+            );
+
+            if (userPositionsMap.size === 0) {
+                setPositions([]);
+                setIsLoading(false);
+                setTotalSummary({
+                    totalLiquidityValue: 0,
+                    totalClaimedFees: 0,
+                    totalUnclaimedFees: 0,
+                    totalPositions: 0,
+                    inRangePositions: 0,
+                    totalInitialValue: 0,
+                    totalPnL: 0,
+                    totalPnLPercentage: 0,
+                });
+                // Reset fetched key on logout/no positions
+                fetchedPublicKeyRef.current = null;
+                return;
+            }
+
+            for (const [poolAddress, _] of userPositionsMap.entries()) {
+                try {
+                    const dlmmPool = await DLMM.create(connection, new PublicKey(poolAddress));
+                    const activeBin = await dlmmPool.getActiveBin();
+                    const currentBinId = activeBin.binId;
+
+                    const { userPositions: poolPositions } = await dlmmPool.getPositionsByUserAndLbPair(userPublicKey);
+                    const tokenXPrice = await getTokenPrice(dlmmPool.tokenX.publicKey.toString());
+                    const tokenYPrice = await getTokenPrice(dlmmPool.tokenY.publicKey.toString());
+
+                    // Fetch decimals using mint addresses if not available on dlmmPool object
+                    let tokenXDecimals = (dlmmPool.tokenX as any).decimal;
+                    let tokenYDecimals = (dlmmPool.tokenY as any).decimal;
+
+                    if (tokenXDecimals === undefined || tokenXDecimals === null || tokenYDecimals === undefined || tokenYDecimals === null) {
+                        try {
+                            const tokenXMintInfo = await getMint(connection, new PublicKey(dlmmPool.tokenX.publicKey));
+                            const tokenYMintInfo = await getMint(connection, new PublicKey(dlmmPool.tokenY.publicKey));
+                            tokenXDecimals = tokenXMintInfo.decimals;
+                            tokenYDecimals = tokenYMintInfo.decimals;
+                        } catch (decimalError) {
+                            console.error('Error fetching token decimals:', decimalError);
+                            // Fallback to a default or handle error appropriately
+                            tokenXDecimals = 0; // Or some default
+                            tokenYDecimals = 0; // Or some default
+                        }
+                    }
+
+                    for (const positionDetails of poolPositions) {
+                        totalPositions++;
+                        const { positionData } = positionDetails;
+
+                        const isInRange = currentBinId >= positionData.lowerBinId && currentBinId <= positionData.upperBinId;
+                        if (isInRange) inRangePositions++;
+
+                        // Ensure amounts are treated as BN before converting to number
+                        const xAmountBN = BN.isBN(positionData.totalXAmount) ? positionData.totalXAmount : new BN(positionData.totalXAmount.toString());
+                        const yAmountBN = BN.isBN(positionData.totalYAmount) ? positionData.totalYAmount : new BN(positionData.totalYAmount.toString());
+
+                        const tokenXAmount = lamportsToTokenAmount(xAmountBN, tokenXDecimals);
+                        const tokenYAmount = lamportsToTokenAmount(yAmountBN, tokenYDecimals);
+
+                        const tokenXValue = tokenXAmount * tokenXPrice;
+                        const tokenYValue = tokenYAmount * tokenYPrice;
+
+                        // Access fee properties, using type assertion or checking for existence
+                        const claimedXAmount = lamportsToTokenAmount(new BN(positionData.totalClaimedFeeXAmount?.toString() || '0'), tokenXDecimals);
+                        const claimedYAmount = lamportsToTokenAmount(new BN(positionData.totalClaimedFeeYAmount?.toString() || '0'), tokenYDecimals);
+
+                        const claimableXAmount = lamportsToTokenAmount(new BN((positionData as any).feeX?.toString() || '0'), tokenXDecimals);
+                        const claimableYAmount = lamportsToTokenAmount(new BN((positionData as any).feeY?.toString() || '0'), tokenYDecimals);
+
+
+                        // Removed conditional logging inside the loop
+
+
+                        const positionValue = tokenXValue + tokenYValue;
+                        const claimedValue = (claimedXAmount * tokenXPrice) + (claimedYAmount * tokenYPrice);
+                        const unclaimedValue = (claimableXAmount * tokenXPrice) + (claimableYAmount * tokenYPrice);
+                        const totalCurrentValueForPosition = positionValue + claimedValue + unclaimedValue; // Renamed to avoid scope conflict
+
+                        // Removed conditional logging inside the loop
+
+                        totalLiquidityValue += positionValue;
+                        totalClaimedFees += claimedValue;
+                        totalUnclaimedFees += unclaimedValue;
+                        // Removed conditional logging inside the loop
+
+
+                        const depositInfo = await getInitialDeposit(positionDetails.publicKey.toString());
+                        if (depositInfo) {
+                             totalInitialValue += (depositInfo.tokenXUsdAmount || 0) + (depositInfo.tokenYUsdAmount || 0);
+                        }
+
+                        const dynamicFee = await getCurrentDynamicFee(poolAddress);
+
+
+                        fetchedPositions.push({
+                            address: positionDetails.publicKey.toString(),
+                            pair_address: poolAddress,
+                            owner: userPublicKey.toBase58(), // Assuming owner is the connected user
+                            total_fee_usd_claimed: 0, // This might need to be fetched from API if not in SDK
+                            total_reward_usd_claimed: 0, // This might need to be fetched from API if not in SDK
+                            fee_apy_24h: 0, // This might need to be fetched from API
+                            fee_apr_24h: 0, // This might need to be fetched from API
+                            daily_fee_yield: 0, // This might need to be fetched from API
+                            lowerBinId: positionData.lowerBinId,
+                            upperBinId: positionData.upperBinId,
+                            // Access binStep from the pool object directly if available
+                            binStep: (dlmmPool as any).binStep,
+                            tokenXMint: dlmmPool.tokenX.publicKey.toBase58(),
+                            tokenYMint: dlmmPool.tokenY.publicKey.toBase58(),
+                            tokenXDecimals: tokenXDecimals,
+                            tokenYDecimals: tokenYDecimals,
+                            totalXAmount: BigInt(xAmountBN.toString()), // Convert BN to string then bigint
+                            totalYAmount: BigInt(yAmountBN.toString()), // Convert BN to string then bigint
+                            pendingFeeX: BigInt(new BN((positionData as any).feeX?.toString() || '0').toString()), // Convert to BN then string then bigint
+                            pendingFeeY: BigInt(new BN((positionData as any).feeY?.toString() || '0').toString()), // Convert to BN then string then bigint
+                            // Access rewardInfos from positionData, using type assertion based on observed structure
+                            pendingRewards: (positionData as any).rewardInfos?.map((r: any) => ({ mint: r.mint?.toBase58() || '', amount: BigInt(new BN(r.pendingReward?.toString() || '0').toString()) })) || [], // Convert to BN then string then bigint
+                            totalXAmountUi: tokenXAmount.toFixed(tokenXDecimals),
+                            totalYAmountUi: tokenYAmount.toFixed(tokenYDecimals),
+                            pendingFeeXUi: claimableXAmount.toFixed(tokenXDecimals), // Use claimableXAmount here
+                            pendingFeeYUi: claimableYAmount.toFixed(tokenYDecimals), // Use claimableYAmount here
+                            pendingRewardsUi: (positionData as any).pendingRewardsUi?.map((r: any) => ({ amount: r.amount?.toString() || '0', mint: r.mint?.toBase58() || '' })) || [],
+                            priceRange: `${positionData.lowerBinId} - ${positionData.upperBinId}`, // Simple bin ID range for now
+                            totalValueInSol: totalCurrentValueForPosition.toFixed(4), // Using total value for this position
+                            isInRange: isInRange,
+                            currentBinId: currentBinId,
+                            tokenXPrice: tokenXPrice,
+                            tokenYPrice: tokenYPrice,
+                            claimedValue: claimedValue,
+                            unclaimedValue: unclaimedValue,
+                            positionValue: positionValue,
+                            totalCurrentValue: totalCurrentValueForPosition, // Use the value for this position
+                            depositInfo: depositInfo,
+                            dynamicFee: dynamicFee,
+                        });
+                    }
+                } catch (poolError: any) {
+                    console.error(`Error processing pool ${poolAddress}:`, poolError);
+                    // Continue to the next pool even if one fails
+                }
+            }
+
+             const overallTotalCurrentValue = totalLiquidityValue + totalClaimedFees + totalUnclaimedFees;
+             const overallTotalPnL = overallTotalCurrentValue - totalInitialValue;
+             const overallTotalPnLPercentage = totalInitialValue > 0 ? (overallTotalPnL / totalInitialValue) * 100 : 0;
+
+
+            setPositions(fetchedPositions);
+            setTotalSummary({
+                totalLiquidityValue,
+                totalClaimedFees,
+                totalUnclaimedFees,
+                totalPositions,
+                inRangePositions,
+                totalInitialValue,
+                totalPnL: overallTotalPnL,
+                totalPnLPercentage: overallTotalPnLPercentage,
+            });
+
+
+        } catch (e: any) {
+            console.error('Error fetching user positions:', e);
+            setError(e.message || 'LP 포지션 목록을 불러오는데 실패했습니다.');
+        } finally {
+            setIsLoading(false);
+        }
+    }, [userPublicKey]); // Dependency on userPublicKey
+
+
+    useEffect(() => {
+        const currentPublicKeyString = userPublicKey?.toBase58() || null;
+
+        // Fetch positions only when userPublicKey changes and is not null/undefined,
+        // and we haven't fetched for this specific public key yet.
+        if (userPublicKey && currentPublicKeyString !== fetchedPublicKeyRef.current) {
+            fetchedPublicKeyRef.current = currentPublicKeyString; // Mark as fetching/fetched for this key immediately
+            fetchPositions();
+        } else if (!userPublicKey) {
+            // Reset state and log tracking when userPublicKey is null/undefined (e.g., after logout)
+            setPositions([]);
+            setIsLoading(false);
+            fetchedPublicKeyRef.current = null; // Reset log tracking on logout
+            setTotalSummary({
+                totalLiquidityValue: 0,
+                totalClaimedFees: 0,
+                totalUnclaimedFees: 0,
+                totalPositions: 0,
+                inRangePositions: 0,
+                totalInitialValue: 0,
+                totalPnL: 0,
+                totalPnLPercentage: 0,
+            });
+        }
+        // Dependencies: Only userPublicKey?.toBase58() and fetchPositions.
+        // fetchPositions is memoized with useCallback and depends only on userPublicKey.
+        // This setup should prevent infinite loops.
+    }, [userPublicKey?.toBase58(), fetchPositions]);
+
+
+    // Return fetchPositions so it can be called manually from the component
+    return { positions, isLoading, error, totalSummary, fetchPositions };
+};
+
+>>>> src/hooks/usePoolSearch.ts
+import { useState, useCallback } from 'react';
+import axios from 'axios';
+import { NATIVE_MINT } from '@solana/spl-token';
+
+interface Pool {
+  poolAddress: string;
+  tokenX: string;
+  tokenY: string;
+  tokenXMint: string;
+  tokenYMint: string;
+  binStep: number;
+  baseFeeBps: number;
+  name: string;
+  liquidity: number;
+  trade_volume_24h: number;
+  current_price: number;
+}
+
+interface UsePoolSearch {
+  pools: Pool[];
+  poolsLoading: boolean;
+  error: string | null;
+  fetchPoolsByToken: (tokenCaInput: string) => Promise<void>;
+  setPools: (pools: Pool[]) => void; // Allow resetting pools from outside
+  setError: (error: string | null) => void; // Allow setting error from outside
+}
+
+export function usePoolSearch(): UsePoolSearch {
+  const [pools, setPools] = useState<Pool[]>([]);
+  const [poolsLoading, setPoolsLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+
+  const fetchPoolsByToken = useCallback(async (tokenCaInput: string) => {
+    if (!tokenCaInput) {
+      setError('대상 토큰 민트 주소를 입력해주세요.');
+      setPools([]);
+      return;
+    }
+    setPoolsLoading(true);
+    setError(null);
+    setPools([]);
+    try {
+      const meteoraApiUrl = `https://dlmm-api.meteora.ag/pair/all_by_groups?include_pool_token_pairs=${tokenCaInput}-${NATIVE_MINT.toBase58()}`;
+      console.log(`Fetching pools from Meteora API (usePoolSearch): ${meteoraApiUrl}`);
+      const response = await axios.get(meteoraApiUrl, { headers: { 'accept': 'application/json' } });
+      const apiResponse = response.data;
+      console.log("Meteora API response received (usePoolSearch).");
+      const relevantPairs = apiResponse.groups.flatMap((group: any) =>
+        group.pairs.map((pair: any) => ({
+          poolAddress: pair.address,
+          tokenX: pair.name?.split('/')[0] || pair.mint_x.substring(0,4),
+          tokenY: pair.name?.split('/')[1] || pair.mint_y.substring(0,4),
+          tokenXMint: pair.mint_x,
+          tokenYMint: pair.mint_y,
+          binStep: pair.bin_step,
+          baseFeeBps: parseFloat(pair.base_fee_percentage) * 100,
+          name: pair.name,
+          liquidity: parseFloat(pair.liquidity),
+          trade_volume_24h: pair.trade_volume_24h,
+          current_price: pair.current_price,
+        }))
+      );
+      relevantPairs.sort((a: Pool, b: Pool) => b.liquidity - a.liquidity);
+      setPools(relevantPairs);
+      if (relevantPairs.length === 0) {
+        setError('입력하신 토큰 페어에 해당하는 풀을 찾을 수 없습니다.');
+      }
+    } catch (error: any) {
+      console.error('Failed to fetch pools by token from Meteora API (usePoolSearch):', error);
+      const errorMessage = error.response?.data?.message || error.message;
+      setError(`풀 목록을 불러오는 데 실패했습니다: ${errorMessage}`);
+    } finally {
+      setPoolsLoading(false);
+    }
+  }, []);
+
+  return {
+    pools,
+    poolsLoading,
+    error,
+    fetchPoolsByToken,
+    setPools,
+    setError,
+  };
+}
+
+>>>> src/hooks/usePriceRangeCalculation.ts
+import { useState, useEffect, useCallback } from 'react';
+import debounce from 'lodash.debounce';
+import apiClient from '@/lib/api';
+import { StrategyType } from '@meteora-ag/dlmm';
+
+interface Pool {
+  poolAddress: string;
+  binStep: number;
+  current_price: number;
+  // Include other necessary pool properties
+}
+
+interface PriceRangeResult {
+  minPrice: string;
+  maxPrice: string;
+  minBinId: number;
+  maxBinId: number;
+}
+
+interface UsePriceRangeCalculation {
+  calculatedPriceRange: PriceRangeResult | null;
+  calculationLoading: boolean;
+  calculationError: string | null;
+}
+
+export function usePriceRangeCalculation(
+  selectedPool: Pool | null,
+  totalSolValue: string,
+  solDepositRatioPercent: string,
+  strategyType: keyof typeof StrategyType
+): UsePriceRangeCalculation {
+  const [calculatedPriceRange, setCalculatedPriceRange] = useState<PriceRangeResult | null>(null);
+  const [calculationLoading, setCalculationLoading] = useState(false);
+  const [calculationError, setCalculationError] = useState<string | null>(null);
+
+  const calculatePriceRange = useCallback(
+    debounce(async () => {
+      console.log('[usePriceRangeCalculation] Called. selectedPool:', selectedPool, 'totalSolValue:', totalSolValue, 'solDepositRatioPercent:', solDepositRatioPercent, 'strategyType:', strategyType);
+      const parsedTotalSolValue = parseFloat(totalSolValue);
+      if (!selectedPool || !totalSolValue || isNaN(parsedTotalSolValue) || parsedTotalSolValue <= 0 || solDepositRatioPercent === undefined || !strategyType || selectedPool.current_price === undefined) {
+        console.log('[usePriceRangeCalculation] Conditions not met (e.g., totalSolValue invalid or other params missing), setting calculatedPriceRange to null.');
+        setCalculatedPriceRange(null);
+        setCalculationError(null); // Clear error if conditions are not met
+        return;
+      }
+      setCalculationLoading(true);
+      setCalculationError(null);
+      try {
+        const response = await apiClient.post('/api/dlmm/calculate-price-range', {
+          poolAddress: selectedPool.poolAddress,
+          currentPrice: selectedPool.current_price.toString(),
+          binStep: selectedPool.binStep,
+          solDepositRatioPercent: solDepositRatioPercent,
+          strategyType: strategyType,
+        });
+        setCalculatedPriceRange(response.data);
+      } catch (error: any) {
+        console.error('Failed to calculate price range (usePriceRangeCalculation):', error);
+        setCalculationError(`가격 범위 계산 실패: ${error.response?.data?.message || error.message}`);
+        setCalculatedPriceRange(null);
+      } finally {
+        setCalculationLoading(false);
+      }
+    }, 500),
+    [selectedPool, totalSolValue, solDepositRatioPercent, strategyType]
+  );
+
+  useEffect(() => {
+    calculatePriceRange();
+    return () => {
+      calculatePriceRange.cancel();
+    };
+  }, [selectedPool, totalSolValue, solDepositRatioPercent, strategyType, calculatePriceRange]);
+
+  return {
+    calculatedPriceRange,
+    calculationLoading,
+    calculationError,
+  };
+}
+
+>>>> src/hooks/useRemoveLp.ts
+import { useState } from 'react';
+import { removeLiquidityPosition } from '@/lib/api'; // Adjust path as necessary
+
+// Interface for the parameters of the removeLp mutation function
+interface RemoveLpParams {
+  positionAddress: string;
+  poolAddress: string;
+  bps?: number; // Optional: Basis points to remove (0-10000)
+  shouldClaimAndClose?: boolean; // Optional: Whether to claim fees and close position
+}
+
+// Interface for the success data returned by the hook
+interface RemoveLpData {
+  message: string;
+  signature: string;
+  removedBps?: number;
+  claimedAndClosed?: boolean;
+}
+
+// Interface for the hook's return value
+interface UseRemoveLpReturn {
+  removeLp: (params: RemoveLpParams) => Promise<void>;
+  isLoading: boolean;
+  error: any | null; // Can be more specific if backend error structure is known
+  data: RemoveLpData | null;
+  reset: () => void; // Function to reset state
+}
+
+/**
+ * Custom hook to manage the state and logic for removing an LP position.
+ *
+ * @returns {UseRemoveLpReturn} An object containing the mutation function, loading state, error state, success data, and a reset function.
+ */
+export const useRemoveLp = (): UseRemoveLpReturn => {
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [error, setError] = useState<any | null>(null);
+  const [data, setData] = useState<RemoveLpData | null>(null);
+
+  /**
+   * Asynchronously calls the API to remove an LP position and updates state.
+   * @param params - The parameters required for the LP removal API call.
+   */
+  const removeLp = async (params: RemoveLpParams) => {
+    setIsLoading(true);
+    setError(null);
+    setData(null);
+    try {
+      console.log('[useRemoveLp] Attempting to remove LP with params:', params);
+      const result = await removeLiquidityPosition(params);
+      setData(result);
+      console.log('[useRemoveLp] LP removal successful:', result);
+    } catch (e: any) {
+      console.error('[useRemoveLp] Error removing LP:', e);
+      setError(e.message || e || 'An unknown error occurred during LP removal.');
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  /**
+   * Resets the hook's state (isLoading, error, data).
+   */
+  const reset = () => {
+    setIsLoading(false);
+    setError(null);
+    setData(null);
+  };
+
+  return { removeLp, isLoading, error, data, reset };
+};
+>>>> src/lib/api.ts
+// src/lib/api.ts
+import axios, { InternalAxiosRequestConfig, AxiosResponse, AxiosError } from 'axios';
+
+const backendUrl = process.env.NEXT_PUBLIC_BACKEND_URL || 'http://localhost:3000';
+
+const apiClient = axios.create({
+  baseURL: backendUrl,
+  withCredentials: true, // 쿠키를 주고받기 위해 필요 (세션 기반 인증 시)
+});
+
+// 요청 인터셉터: 모든 요청에 JWT를 헤더에 추가
+apiClient.interceptors.request.use(
+  (config: InternalAxiosRequestConfig) => {
+    if (typeof window !== 'undefined') { // 브라우저 환경에서만 실행
+      const token = localStorage.getItem('jwtToken');
+      if (token) {
+        config.headers['Authorization'] = `Bearer ${token}`;
+      }
+    }
+    return config;
+  },
+  (error: AxiosError) => {
+    return Promise.reject(error);
+  }
+);
+
+// 응답 인터셉터 (예: 401 Unauthorized 시 자동 로그아웃 처리 등 - 선택 사항)
+apiClient.interceptors.response.use(
+  (response: AxiosResponse) => {
+    return response;
+  },
+  (error: AxiosError) => {
+    if (error.response && error.response.status === 401) {
+      // 예: 토큰 만료 또는 무효 시 자동 로그아웃 처리
+      if (typeof window !== 'undefined') {
+        localStorage.removeItem('jwtToken');
+        // 로그인 페이지로 리디렉션 (라우터 사용 필요)
+        // window.location.href = '/'; 
+        console.error('Unauthorized, logging out.');
+      }
+    }
+    return Promise.reject(error);
+  }
+);
+
+// Function to call the new LP removal backend
+// Function to call the original backend for LP removal
+export const removeLiquidityPosition = async (positionAddress: string, poolAddress: string) => {
+  try {
+    // Request sent to the original backend, which will handle private key retrieval and forwarding
+    const response = await apiClient.post('/api/dlmm/remove-lp', {
+      positionAddress,
+      poolAddress,
+    });
+    return response.data;
+  } catch (error) {
+    console.error('Error removing liquidity position:', error);
+    throw error;
+  }
+};
+
+export default apiClient;
+
+>>>> src/store/authStore.ts
+// src/store/authStore.ts
+import { create } from 'zustand';
+import apiClient from '@/lib/api'; // API 클라이언트
+import { User } from '@/types/user'; // 방금 만든 User 타입
+
+interface AuthState {
+  user: User | null;
+  token: string | null;
+  isLoggedIn: boolean;
+  isLoading: boolean; // 인증 상태 로딩 중 여부
+  login: (token: string, userData: User) => void; // 로그인 시 호출
+  logout: () => Promise<void>; // 로그아웃 시 호출
+  initializeAuth: () => void; // 앱 시작 시 인증 상태 초기화
+  fetchUser: () => Promise<void>; // 토큰이 있을 때 사용자 정보 가져오기
+}
+
+const useAuthStore = create<AuthState>((set, get) => ({
+  user: null,
+  token: null,
+  isLoggedIn: false,
+  isLoading: true, // 앱 시작 시 로딩 상태로 시작
+
+  login: (token, userData) => {
+    if (typeof window !== 'undefined') {
+      localStorage.setItem('jwtToken', token);
+    }
+    // apiClient의 헤더는 인터셉터에서 자동으로 설정됨
+    set({ user: userData, token, isLoggedIn: true, isLoading: false });
+  },
+
+  logout: async () => {
+    set({ isLoading: true });
+    if (typeof window !== 'undefined') {
+      localStorage.removeItem('jwtToken');
+    }
+    delete apiClient.defaults.headers.common['Authorization']; // API 클라이언트 헤더에서도 제거
+    try {
+      // 백엔드에 로그아웃 요청 (세션/쿠키 무효화 등)
+      await apiClient.post('/api/auth/logout'); 
+      console.log('Logged out from server and client side');
+    } catch (error) {
+      console.error('Logout API call failed:', error);
+      // 실패하더라도 클라이언트 측에서는 로그아웃 처리 계속 진행
+    }
+    set({ user: null, token: null, isLoggedIn: false, isLoading: false });
+    // 로그인 페이지로 리디렉션
+    if (typeof window !== 'undefined') {
+        window.location.href = '/'; // 간단한 리디렉션
+    }
+  },
+
+  fetchUser: async () => {
+    set({ isLoading: true });
+    try {
+      // 백엔드의 /api/auth/me 엔드포인트는 JWT를 통해 사용자를 식별하고 사용자 정보를 반환해야 함
+      const response = await apiClient.get<{ user: User }>('/api/auth/me'); 
+      if (response.data && response.data.user) {
+        // Assuming the backend /api/auth/me endpoint now returns solanaPrivateKey
+        set({ user: response.data.user, isLoggedIn: true, isLoading: false });
+      } else {
+        // 토큰은 유효했으나 사용자 정보를 못 받아온 경우 (이론상 발생하기 어려움)
+        // 또는 /api/auth/user가 사용자를 찾지 못한 경우
+        console.warn('User data not found in /api/auth/user response, logging out.');
+        get().logout(); // 상태 초기화
+      }
+    } catch (error) {
+      console.error('Failed to fetch user with token:', error);
+      // apiClient의 응답 인터셉터에서 401 시 localStorage 토큰 제거 등을 이미 처리할 수 있음
+      // 여기서는 상태만 초기화
+      set({ user: null, token: null, isLoggedIn: false, isLoading: false });
+    }
+  },
+  
+  initializeAuth: () => {
+    if (typeof window !== 'undefined') {
+      const storedToken = localStorage.getItem('jwtToken');
+      if (storedToken) {
+        set({ token: storedToken, isLoggedIn: true }); // 우선 토큰과 로그인 상태 설정
+        get().fetchUser(); // 그 다음 실제 사용자 정보 가져오기 (토큰 유효성 검증 포함)
+      } else {
+        set({ user: null, token: null, isLoggedIn: false, isLoading: false }); // 토큰 없으면 로딩 완료, 비로그인 상태
+      }
+    } else {
+      // 서버 사이드 렌더링 환경에서는 로컬 스토리지가 없으므로 로딩 완료 처리
+      set({ isLoading: false }); 
+    }
+  },
+}));
+
+export default useAuthStore;
+
+>>>> src/types/dlmm.ts
+// src/types/dlmm.ts
+
+// Define the type for the detailed LP position data returned from the backend
+export interface LpPosition {
+  address: string; // Position address
+  pair_address: string; // LB Pair address
+  owner: string; // Owner public key
+
+  // Data from Meteora API (subset)
+  total_fee_usd_claimed: number; // Total claimed fee in USD
+  total_reward_usd_claimed: number; // Total claimed reward in USD
+  fee_apy_24h: number; // 24h fee APY
+  fee_apr_24h: number; // 24h fee APR
+  daily_fee_yield: number; // Daily fee yield
+
+  // Calculated details from on-chain data (now provided by backend)
+  lowerBinId: number;
+  upperBinId: number;
+  binStep: number;
+  tokenXMint: string;
+  tokenYMint: string;
+  tokenXDecimals: number;
+  tokenYDecimals: number;
+  totalXAmount: bigint; // Raw amount
+  totalYAmount: bigint; // Raw amount
+  pendingFeeX: bigint; // Raw amount
+  pendingFeeY: bigint; // Raw amount
+  pendingRewards: { mint: string; amount: bigint }[]; // Raw amounts
+  totalXAmountUi: string; // Formatted UI amount
+  totalYAmountUi: string; // Formatted UI amount
+  pendingFeeXUi: string; // Formatted UI amount
+  pendingFeeYUi: string; // Formatted UI amount
+  pendingRewardsUi: { mint: string; amount: string }[]; // Formatted UI amounts
+  priceRange: string; // Formatted price range
+  totalValueInSol: string; // Total value in SOL (formatted)
+}
+
+// 필요하다면 다른 DLMM 관련 타입들도 여기에 정의할 수 있습니다.
+// 예: interface DlmmPoolInfo { ... }
+
+>>>> src/types/user.ts
+// src/types/user.ts
+
+export interface User {
+  id: string; // DB의 사용자 ID
+  googleId?: string; // 구글 ID (선택적)
+  displayName: string; // 구글 표시 이름
+  email: string; // 이메일
+  solanaPublicKey?: string; // 솔라나 공개키 (최초 로그인 시 생성)
+  // 필요에 따라 추가적인 사용자 정보를 포함할 수 있습니다.
+}
+
+>>>> src/utils/dlmmPositionUtils.ts
+import { Connection, PublicKey, AccountInfo } from '@solana/web3.js';
+import { MintLayout, getMint, NATIVE_MINT } from '@solana/spl-token';
+import {
+    PositionV2Account,
+    LbPairAccount,
+    BinArrayAccount,
+    BinArray,
+    getBinArrayPubkeysForPosition,
+    getPriceOfBinByBinId,
+    getAmountsFromLiquidityShares,
+    DLMM // Assuming DLMM is also exported from the root
+} from '@meteora-ag/dlmm'; // Attempt to import directly from the root
+import axios from 'axios';
+import Decimal from 'decimal.js';
+
+const JUPITER_PRICE_API_URL = 'https://lite-api.jup.ag/price/v2'; // Jupiter Price API URL
+
+// Helper to convert lamports to UI amount
+function lamportsToUiAmount(lamports: bigint | number | string | undefined | null, decimals: number | undefined | null): string {
+    if (lamports === undefined || lamports === null || decimals === undefined || decimals === null) return '0';
+    try {
+        const amountDecimal = new Decimal(lamports.toString()).div(new Decimal(10).pow(decimals));
+        return amountDecimal.toFixed(Math.min(decimals, 6)); // Example: show up to 6 decimals
+    } catch (e) {
+        console.error("Error formatting amount:", e);
+        return 'Error';
+    }
+}
+
+// Helper to get token prices from Jupiter
+async function getJupiterPrices(mintAddresses: string[]): Promise<{ [key: string]: number }> {
+    if (!mintAddresses || mintAddresses.length === 0) return {};
+    try {
+        const ids = mintAddresses.join(',');
+        const response = await axios.get(`${JUPITER_PRICE_API_URL}?ids=${ids}&vsToken=${NATIVE_MINT.toBase58()}`);
+        const prices = response.data.data;
+        const priceMap: { [key: string]: number } = {};
+        for (const id in prices) {
+            priceMap[id] = prices[id].price;
+        }
+        return priceMap;
+    } catch (error) {
+        console.error('Failed to fetch prices from Jupiter:', error);
+        return {};
+    }
+}
+
+// Helper to convert internal price (bin price) to UI price (Y/X)
+function convertInternalPriceToUi(internalPrice: bigint | number | string | Decimal | undefined | null, tokenXDecimals: number | undefined | null, tokenYDecimals: number | undefined | null): string {
+    if (internalPrice === undefined || internalPrice === null || tokenXDecimals === undefined || tokenXDecimals === null || tokenYDecimals === undefined || tokenYDecimals === null) {
+        return 'N/A';
+    }
+    try {
+        const priceDecimal = internalPrice instanceof Decimal ? internalPrice : new Decimal(internalPrice?.toString() || '0');
+        const adjustedPrice = priceDecimal.mul(new Decimal(10).pow(tokenYDecimals)).div(new Decimal(10).pow(tokenXDecimals));
+        return adjustedPrice.toFixed(Math.max(tokenXDecimals, tokenYDecimals)); // Adjust precision
+    } catch (e) {
+        console.error("Error converting internal price to UI:", e);
+        return 'Error';
+    }
+}
+
+// Define a type for the detailed position data including calculated values
+export interface DetailedLpPosition {
+    address: string; // Position address
+    pair_address: string; // LB Pair address
+    owner: string; // Owner public key
+
+    // Data from Meteora API (subset)
+    total_fee_usd_claimed: number; // Total claimed fee in USD
+    total_reward_usd_claimed: number; // Total claimed reward in USD
+    fee_apy_24h: number; // 24h fee APY
+    fee_apr_24h: number; // 24h fee APR
+    daily_fee_yield: number; // Daily fee yield
+
+    // Calculated details from on-chain data
+    lowerBinId: number;
+    upperBinId: number;
+    binStep: number;
+    tokenXMint: string;
+    tokenYMint: string;
+    tokenXDecimals: number;
+    tokenYDecimals: number;
+    totalXAmount: bigint; // Raw amount
+    totalYAmount: bigint; // Raw amount
+    pendingFeeX: bigint; // Raw amount
+    pendingFeeY: bigint; // Raw amount
+    pendingRewards: { mint: string; amount: bigint }[]; // Raw amounts
+    totalXAmountUi: string; // Formatted UI amount
+    totalYAmountUi: string; // Formatted UI amount
+    pendingFeeXUi: string; // Formatted UI amount
+    pendingFeeYUi: string; // Formatted UI amount
+    pendingRewardsUi: { mint: string; amount: string }[]; // Formatted UI amounts
+    priceRange: string; // Formatted price range
+    totalValueInSol: string; // Total value in SOL (formatted)
+}
+
+
+/**
+ * Fetches detailed information for a single LP position by its address.
+ * This includes fetching on-chain data and calculating amounts/values.
+ * @param connection The Solana Connection object.
+ * @param positionAddress The public key of the position account.
+ * @returns A promise that resolves to the detailed position information or null if fetching/processing fails.
+ */
+export async function fetchDetailedPosition(connection: Connection, positionAddress: PublicKey): Promise<DetailedLpPosition | null> {
+    try {
+        // 1. Fetch position account data
+        const positionAccountInfo = await connection.getAccountInfo(positionAddress);
+        if (!positionAccountInfo) {
+            console.warn(`Position account not found for address: ${positionAddress.toBase58()}`);
+            return null;
+        }
+
+        // 2. Deserialize position account
+        const positionState = PositionV2Account.deserialize(positionAccountInfo.data)?.[0];
+        if (!positionState) {
+            console.error(`Failed to deserialize position account: ${positionAddress.toBase58()}`);
+            return null;
+        }
+
+        const lbPairAddress = positionState.lb_pair;
+
+        // 3. Fetch LB Pair account data
+        const lbPairAccountInfo = await connection.getAccountInfo(lbPairAddress);
+        if (!lbPairAccountInfo) {
+            console.warn(`LB Pair account not found for address: ${lbPairAddress.toBase58()}`);
+            return null;
+        }
+
+        // 4. Deserialize LB Pair account
+        const lbPairState = LbPairAccount.deserialize(lbPairAccountInfo.data)?.[0];
+        if (!lbPairState) {
+            console.error(`Failed to deserialize LB Pair account: ${lbPairAddress.toBase58()}`);
+            return null;
+        }
+
+        const tokenXMint = lbPairState.token_x_mint;
+        const tokenYMint = lbPairState.token_y_mint;
+
+        // 5. Fetch Mint account data for tokens and rewards
+        const mintPubkeysToFetch = [tokenXMint, tokenYMint];
+        lbPairState.reward_infos.forEach((rewardInfo: { mint: PublicKey | null }) => {
+             if (rewardInfo.mint && !rewardInfo.mint.equals(PublicKey.default)) {
+                 mintPubkeysToFetch.push(rewardInfo.mint);
+             }
+        });
+
+        const mintAccountInfos = await connection.getMultipleAccountsInfo(mintPubkeysToFetch);
+        const mintMap = new Map<string, any>(); // Map mint address string to MintLayout data
+
+        mintAccountInfos.forEach((accountInfo, index) => {
+            if (accountInfo) {
+                try {
+                    const mintState = MintLayout.decode(accountInfo.data);
+                    mintMap.set(mintPubkeysToFetch[index].toBase58(), mintState);
+                } catch (e) {
+                    console.error(`Failed to unpack Mint account ${mintPubkeysToFetch[index].toBase58()}:`, e);
+                }
+            }
+        });
+
+        const tokenXMintInfo = mintMap.get(tokenXMint.toBase58());
+        const tokenYMintInfo = mintMap.get(tokenYMint.toBase58());
+
+        if (!tokenXMintInfo || !tokenYMintInfo) {
+             console.warn(`Mint info not found for LbPair ${lbPairAddress.toBase58()}. Skipping calculation.`);
+             return null;
+        }
+
+        const tokenXDecimals = tokenXMintInfo.decimals;
+        const tokenYDecimals = tokenYMintInfo.decimals;
+
+        // 6. Fetch BinArray account data for the position's range
+        const binArrayPubkeysForPosition = getBinArrayPubkeysForPosition(
+            lbPairAddress,
+            positionState.lower_bin_id,
+            positionState.upper_bin_id
+        );
+        const binArrayAccountInfos = await connection.getMultipleAccountsInfo(binArrayPubkeysForPosition);
+
+        const binArraysForPosition = binArrayAccountInfos.map((accountInfo, index) => {
+            if (!accountInfo) {
+                console.warn(`BinArray account not found for pubkey: ${binArrayPubkeysForPosition[index].toBase58()}`);
+                return null;
+            }
+            try {
+                const binArrayState = BinArrayAccount.deserialize(accountInfo.data)?.[0];
+                 if (!binArrayState) {
+                       console.warn(`Failed to deserialize BinArray account: ${binArrayPubkeysForPosition[index].toBase58()}`);
+                       return null;
+                  }
+                return { publicKey: binArrayPubkeysForPosition[index], account: binArrayState };
+            } catch (e) {
+                console.error(`Error deserializing BinArray account ${binArrayPubkeysForPosition[index].toBase58()}:`, e);
+                return null;
+            }
+        }).filter(ba => ba !== null);
+
+
+        // 7. Calculate total amounts, fees, and rewards from on-chain data
+        let totalX = BigInt(0);
+        let totalY = BigInt(0);
+        let pendingFeeX = BigInt(0);
+        let pendingFeeY = BigInt(0);
+        let pendingRewardsMap = new Map<string, bigint>();
+
+        for (let binId = positionState.lower_bin_id; binId <= positionState.upper_bin_id; binId++) {
+            const binArrayIndex = BinArray.binIdToBinArrayIndex(binId);
+            const binArray = binArraysForPosition.find(ba => ba?.account.index === binArrayIndex)?.account;
+
+            if (!binArray) {
+                console.warn(`BinArray for index ${binArrayIndex} not found for bin ${binId}. Skipping calculations for this bin.`);
+                continue;
+            }
+
+            const binIndexInArray = BinArray.getBinIndexInArray(binArray, binId);
+            const binData = binArray.bins[binIndexInArray];
+
+            const liquidityShare = positionState.liquidity_shares[binId - positionState.lower_bin_id];
+
+            if (liquidityShare > 0) {
+                try {
+                     const { amountX, amountY } = getAmountsFromLiquidityShares(binData, liquidityShare);
+                     totalX += amountX;
+                     totalY += amountY;
+                } catch (e) {
+                     console.error(`Error calculating amounts from liquidity shares for bin ${binId}:`, e);
+                }
+            }
+
+            const feeInfo = positionState.fee_infos[binId - positionState.lower_bin_id];
+            pendingFeeX += feeInfo.fee_x_pending;
+            pendingFeeY += feeInfo.fee_y_pending;
+
+            const rewardInfo = positionState.reward_infos[binId - positionState.lower_bin_id];
+             if (rewardInfo && rewardInfo.reward_pendings) {
+                 rewardInfo.reward_pendings.forEach((pendingAmount: bigint, rewardIndex: number) => {
+                     const rewardMint = lbPairState.reward_infos?.[rewardIndex]?.mint?.toBase58();
+                     if (rewardMint && pendingAmount > 0) {
+                         pendingRewardsMap.set(rewardMint, (pendingRewardsMap.get(rewardMint) || BigInt(0)) + pendingAmount);
+                     }
+                 });
+             }
+        }
+
+        // 8. Fetch token prices from Jupiter
+        const mintAddressesForPricing = [...mintMap.keys()];
+         if (!mintAddressesForPricing.includes(NATIVE_MINT.toBase58())) { // Add SOL mint if not present
+            mintAddressesForPricing.push(NATIVE_MINT.toBase58());
+        }
+        const pricesInSol = await getJupiterPrices(mintAddressesForPricing);
+
+        // 9. Calculate total value in SOL
+        let totalValue = new Decimal(0);
+
+        const totalXDecimal = new Decimal(totalX.toString()).div(new Decimal(10).pow(tokenXDecimals));
+        const totalYDecimal = new Decimal(totalY.toString()).div(new Decimal(10).pow(tokenYDecimals));
+
+        const tokenXPriceInSol = pricesInSol[tokenXMint.toBase58()] || 0;
+        const tokenYPriceInSol = pricesInSol[tokenYMint.toBase58()] || 0;
+
+        totalValue = totalValue
+            .add(totalXDecimal.mul(tokenXPriceInSol))
+            .add(totalYDecimal.mul(tokenYPriceInSol));
+
+        const pendingFeeXDecimal = new Decimal(pendingFeeX.toString()).div(new Decimal(10).pow(tokenXDecimals));
+        const pendingFeeYDecimal = new Decimal(pendingFeeY.toString()).div(new Decimal(10).pow(tokenYDecimals));
+
+         totalValue = totalValue
+            .add(pendingFeeXDecimal.mul(tokenXPriceInSol))
+            .add(pendingFeeYDecimal.mul(tokenYPriceInSol));
+
+        const pendingRewardsUi: { mint: string; amount: string }[] = [];
+        pendingRewardsMap.forEach((amount, mint) => {
+            const rewardPriceInSol = pricesInSol[mint] || 0;
+            const rewardInfo = lbPairState.reward_infos?.find((ri: { mint: PublicKey | null }) => ri.mint?.toBase58() === mint);
+            // Need to fetch reward mint decimals if not available in lbPairState
+            const rewardMintInfo = mintMap.get(mint);
+            const rewardDecimals = rewardMintInfo?.decimals || 6; // Default to 6 if not found
+
+            const rewardDecimal = new Decimal(amount.toString()).div(new Decimal(10).pow(rewardDecimals));
+            totalValue = totalValue.add(rewardDecimal.mul(rewardPriceInSol));
+            pendingRewardsUi.push({
+                amount: lamportsToUiAmount(amount, rewardDecimals),
+                mint: mint
+            });
+        });
+
+        // 10. Format price range
+        let minPriceFormatted = 'N/A';
+        let maxPriceFormatted = 'N/A';
+        try {
+             const minPriceInternal = getPriceOfBinByBinId(positionState.lower_bin_id, lbPairState.bin_step);
+             const maxPriceInternal = getPriceOfBinByBinId(positionState.upper_bin_id, lbPairState.bin_step);
+
+             minPriceFormatted = convertInternalPriceToUi(minPriceInternal, tokenXDecimals, tokenYDecimals);
+             maxPriceFormatted = convertInternalPriceToUi(maxPriceInternal, tokenXDecimals, tokenYDecimals);
+
+        } catch (e) {
+            console.error("Error formatting price range:", e);
+        }
+
+        // 11. Fetch additional data from Meteora API
+        const apiUrl = `https://dlmm-api.meteora.ag/position/${positionAddress.toBase58()}`;
+        const apiResponse = await axios.get<any>(apiUrl); // Use 'any' for now, will refine type later
+        const apiData = apiResponse.data;
+
+
+        // 12. Combine all data into the DetailedLpPosition structure
+        const detailedPosition: DetailedLpPosition = {
+            address: positionAddress.toBase58(),
+            pair_address: positionState.lb_pair.toBase58(),
+            owner: positionState.owner.toBase58(),
+
+            // Data from Meteora API
+            total_fee_usd_claimed: apiData.total_fee_usd_claimed || 0,
+            total_reward_usd_claimed: apiData.total_reward_usd_claimed || 0,
+            fee_apy_24h: apiData.fee_apy_24h || 0,
+            fee_apr_24h: apiData.fee_apr_24h || 0,
+            daily_fee_yield: apiData.daily_fee_yield || 0,
+
+            // Calculated details
+            lowerBinId: positionState.lower_bin_id,
+            upperBinId: positionState.upper_bin_id,
+            binStep: lbPairState.bin_step,
+            tokenXMint: tokenXMint.toBase58(),
+            tokenYMint: tokenYMint.toBase58(),
+            tokenXDecimals: tokenXDecimals,
+            tokenYDecimals: tokenYDecimals,
+            totalXAmount: totalX,
+            totalYAmount: totalY,
+            pendingFeeX: pendingFeeX,
+            pendingFeeY: pendingFeeY,
+            pendingRewards: Array.from(pendingRewardsMap.entries()).map(([mint, amount]) => ({ mint, amount })),
+            totalXAmountUi: lamportsToUiAmount(totalX, tokenXDecimals),
+            totalYAmountUi: lamportsToUiAmount(totalY, tokenYDecimals),
+            pendingFeeXUi: lamportsToUiAmount(pendingFeeX, tokenXDecimals),
+            pendingFeeYUi: lamportsToUiAmount(pendingFeeY, tokenYDecimals),
+            pendingRewardsUi: pendingRewardsUi,
+            priceRange: `${minPriceFormatted} - ${maxPriceFormatted}`,
+            totalValueInSol: totalValue.toFixed(4),
+        };
+
+        return detailedPosition;
+
+    } catch (error) {
+        console.error(`Error fetching detailed position for ${positionAddress.toBase58()}:`, error);
+        return null;
+    }
+}
+>>>> src/utils/lpDataProcessing.ts
+// frontend/src/utils/lpDataProcessing.ts
+
+import { PublicKey, Connection, Transaction, VersionedTransaction, TransactionInstruction, SystemProgram, AccountInfo } from "@solana/web3.js";
+import { LpPosition } from "@/types/dlmm";
+import Decimal from 'decimal.js';
+import api from '@/lib/api';
+import { getMint, Mint, NATIVE_MINT } from '@solana/spl-token';
+import * as bs58 from 'bs58';
+import axios from 'axios';
+
+const DLMM_PROGRAM_ID = new PublicKey('GrAkKfEpTKQuVHG2Y97Y2FF4i7y7Q5AHLK94JBy7Y5yv');
+const POSITION_V2_ACCOUNT_DISCM = Buffer.from([117, 176, 212, 199, 245, 180, 133, 182]);
+const POSITION_V2_OWNER_OFFSET = 8 + 32;
+
+const bufferToBase58 = (buffer: Buffer): string => {
+    return bs58.encode(buffer);
+};
+
+export function lamportsToUiAmount(lamports: string | number | bigint | undefined | null, decimals: number | undefined | null): string {
+    if (lamports === undefined || lamports === null || decimals === undefined || decimals === null) return '0';
+    try {
+        const amountDecimal = new Decimal(lamports.toString()).div(new Decimal(10).pow(decimals));
+        return amountDecimal.toFixed(Math.min(decimals, 6));
+    } catch (e) {
+        console.error("Error formatting amount:", e);
+        return 'Error';
+    }
+}
+
+export function processRawPositionData(
+    rawPosition: any,
+    lbPairState: any,
+    tokenXMintInfo: Mint,
+    tokenYMintInfo: Mint,
+    pricesInSol: { [mintAddress: string]: number }
+): LpPosition {
+
+    console.warn("processRawPositionData: Calculation logic placeholder.");
+
+    const totalAmounts = calculateTotalAmounts(rawPosition);
+    const pendingFees = calculatePendingFees(rawPosition);
+    const pendingRewards = calculatePendingRewards(rawPosition);
+    const totalValueInSol = calculateTotalValueInSol(totalAmounts, pendingFees, pendingRewards, pricesInSol, tokenXMintInfo.decimals, tokenYMintInfo.decimals);
+    const priceRange = formatPriceRange(lbPairState, rawPosition);
+
+    return {
+        positionAddress: rawPosition.publicKey.toBase58(),
+        lbPairAddress: lbPairState.address.toBase58(),
+        owner: rawPosition.owner.toBase58(),
+        lowerBinId: rawPosition.lower_bin_id,
+        upperBinId: rawPosition.upper_bin_id,
+        binStep: lbPairState.bin_step,
+        tokenXDecimals: tokenXMintInfo.decimals,
+        tokenYDecimals: tokenYMintInfo.decimals,
+        tokenXMint: lbPairState.token_x_mint.toBase58(),
+        tokenYMint: lbPairState.token_y_mint.toBase58(),
+
+        liquidityShares: rawPosition.liquidity_shares,
+        feeInfos: rawPosition.fee_infos,
+        rewardInfos: rawPosition.reward_infos,
+        totalClaimedFeeXAmount: rawPosition.total_claimed_fee_x_amount,
+        totalClaimedFeeYAmount: rawPosition.total_claimed_fee_y_y_amount,
+        totalClaimedRewards: rawPosition.total_claimed_rewards,
+
+        totalXAmount: lamportsToUiAmount(totalAmounts.totalX, tokenXMintInfo.decimals),
+        totalYAmount: lamportsToUiAmount(totalAmounts.totalY, tokenYMintInfo.decimals),
+        pendingFeeX: lamportsToUiAmount(pendingFees.pendingX, tokenXMintInfo.decimals),
+        pendingFeeY: lamportsToUiAmount(pendingFees.pendingY, tokenYMintInfo.decimals),
+        pendingRewards: pendingRewards.map(r => ({
+             amount: lamportsToUiAmount(r.amount, pricesInSol[r.mint] ? 6 : 0),
+             mint: r.mint
+        })),
+        totalValueInSol: totalValueInSol,
+        priceRange: priceRange,
+
+        rawPositionData: rawPosition,
+        rawLbPairData: lbPairState,
+        rawTokenXMintData: tokenXMintInfo,
+        rawTokenYMintData: tokenYMintInfo,
+        pricesInSol: pricesInSol,
+    };
+}
+
+function calculateTotalAmounts(rawPosition: any): { totalX: bigint, totalY: bigint } {
+    return { totalX: BigInt(0), totalY: BigInt(0) };
+}
+
+function calculatePendingFees(rawPosition: any): { pendingX: bigint, pendingY: bigint } {
+    return { pendingX: BigInt(0), pendingY: BigInt(0) };
+}
+
+function calculatePendingRewards(rawPosition: any): { amount: bigint, mint: string }[] {
+    return [];
+}
+
+function calculateTotalValueInSol(
+    totalAmounts: { totalX: bigint, totalY: bigint },
+    pendingFees: { pendingX: bigint, pendingY: bigint },
+    pendingRewards: { amount: bigint, mint: string }[],
+    pricesInSol: { [mintAddress: string]: number },
+    tokenXDecimals: number,
+    tokenYDecimals: number
+): string {
+    return 'N/A';
+}
+
+function formatPriceRange(lbPairState: any, rawPosition: any): string {
+    return `${rawPosition.lower_bin_id} - ${rawPosition.upper_bin_id}`;
+}
+
+export async function buildRemoveLiquidityTransaction(connection: Connection, userPublicKey: PublicKey, position: LpPosition): Promise<Transaction | VersionedTransaction> {
+     const latestBlockhash = await connection.getLatestBlockhash('confirmed');
+     const dummyInstruction = new TransactionInstruction({
+        keys: [], programId: SystemProgram.programId, data: Buffer.from([]),
+    });
+    const dummyTransaction = new Transaction().add(dummyInstruction);
+    dummyTransaction.recentBlockhash = latestBlockhash.blockhash;
+    dummyTransaction.feePayer = userPublicKey;
+    return dummyTransaction;
+}
+
+export async function buildRemoveLiquidityAndSwapTransaction(connection: Connection, userPublicKey: PublicKey, position: LpPosition): Promise<Transaction | VersionedTransaction> {
+     const latestBlockhash = await connection.getLatestBlockhash('confirmed');
+     const dummyInstruction = new TransactionInstruction({
+        keys: [], programId: SystemProgram.programId, data: Buffer.from([]),
+    });
+    const dummyTransaction = new Transaction().add(dummyInstruction);
+    dummyTransaction.recentBlockhash = latestBlockhash.blockhash;
+    dummyTransaction.feePayer = userPublicKey;
+    return dummyTransaction;
+}
+
+>>>> src/utils/lpUtils.ts
+import apiClient from '@/lib/api';
+import { StrategyType } from '@meteora-ag/dlmm';
+
+interface Pool {
+  poolAddress: string;
+  current_price: number; // Added current_price
+  // Include other necessary pool properties
+}
+
+interface PriceRangeResult {
+  minBinId: number;
+  maxBinId: number;
+  minPrice: string;
+  maxPrice: string;
+}
+
+interface AssetCheckResult {
+  needsSwap: boolean;
+  requiredAssets: {
+    solLamports: string;
+    targetTokenLamports: string;
+    tokenCa: string;
+    tokenDecimals: number;
+  };
+  currentBalances: {
+    solLamports: string;
+    targetTokenLamports: string;
+  };
+  swapQuote: any | null;
+}
+
+/**
+ * Executes the LP creation process by calling the backend API.
+ * @param selectedPool - The selected pool object.
+ * @param tokenCaInput - The target token mint address.
+ * @param totalSolValue - The total value to deposit in SOL.
+ * @param solDepositRatioPercent - The percentage of total value to deposit as SOL.
+ * @param strategyType - The selected strategy type.
+ * @param calculatedPriceRange - The calculated price range result.
+ * @param assetCheckResult - The result from the asset check step.
+ * @returns Promise resolving with the API response data on success.
+ * @throws Error if the API call fails.
+ */
+export async function executeLpCreation(
+  selectedPool: Pool,
+  tokenCaInput: string,
+  totalSolValue: string,
+  solDepositRatioPercent: string,
+  strategyType: keyof typeof StrategyType,
+  calculatedPriceRange: PriceRangeResult,
+  assetCheckResult: AssetCheckResult
+): Promise<any> { // Define a more specific return type if possible
+  if (!selectedPool || !tokenCaInput || !totalSolValue || solDepositRatioPercent === undefined || !strategyType || !calculatedPriceRange || !assetCheckResult) {
+    throw new Error('Missing required parameters for LP creation execution.');
+  }
+
+  try {
+      const response = await apiClient.post('/api/dlmm/lp/create', {
+        poolAddress: selectedPool.poolAddress,
+        tokenCa: tokenCaInput,
+        totalSolValue: totalSolValue,
+        solDepositRatioPercent: solDepositRatioPercent,
+        strategyType: strategyType,
+        currentPrice: selectedPool.current_price, // Pass current_price from frontend
+        minBinId: calculatedPriceRange.minBinId, // These Bin IDs are for reference/logging on backend
+        maxBinId: calculatedPriceRange.maxBinId, // These Bin IDs are for reference/logging on backend
+        targetMinPrice: calculatedPriceRange.minPrice, // Pass target prices for backend calculation
+        targetMaxPrice: calculatedPriceRange.maxPrice, // Pass target prices for backend calculation
+        executeLpCreation: true, // Indicate this is the execution step
+      });
+      console.log('LP Creation Response (lpUtils):', response.data);
+    return response.data;
+  } catch (error: any) {
+    console.error('LP Creation Failed (lpUtils):', error);
+    const errorMessage = error.response?.data?.message || error.message;
+    throw new Error(`LP 포지션 생성 실패: ${errorMessage}`);
+  }
+}
+
+>>>> tsconfig.json
+{
+  "compilerOptions": {
+    "target": "ES2017",
+    "lib": ["dom", "dom.iterable", "esnext"],
+    "allowJs": true,
+    "skipLibCheck": true,
+    "strict": true,
+    "noEmit": true,
+    "esModuleInterop": true,
+    "module": "esnext",
+    "moduleResolution": "bundler",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "jsx": "preserve",
+    "incremental": true,
+    "plugins": [
+      {
+        "name": "next"
+      }
+    ],
+    "paths": {
+      "@/*": ["./src/*"]
+    }
+  },
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
+  "exclude": ["node_modules"]
+}
